@@ -10,17 +10,17 @@ That's what I did and this is my lightweight version of Lazy Load - less than 0.
   
 Visit unveil's [project page](http://luis-almeida.github.com/unveil/) to read the documentation and see the demo.
   
-  
+<br>
   
 #### Usage  
 Include the actual image source in a "data-src" attribute.  
 Use a placeholder image in the src attribute, something to be displayed while the original image loads.  
   
-<pre>&t;img src="bg.png" data-src="img.jpg" /></pre>  
+<pre>&lt;img src="bg.png" data-src="img.jpg" /></pre>  
   
 <pre>$("img").unveil();</pre>
   
-  
+<br>
   
 ###Option  
 By default, images are only loaded and "unveiled" when user scrolls to them and they became visible on the screen.  
@@ -28,7 +28,7 @@ If you want your images to load earlier than that, lets say 200px before they ge
   
 <pre>$("img").unveil( 200 );</pre>
   
-  
+<br>
   
 ###Trigger  
 You can still trigger image loading whenever you need.  
@@ -36,7 +36,7 @@ All you have to do is select the images you want to "unveil" and trigger the eve
   
 <pre>$("img").trigger( "unveil" );</pre>
   
-  
+<br>
   
 ###Demo  
 Visit [project page](http://luis-almeida.github.com/unveil/) to see it working.
