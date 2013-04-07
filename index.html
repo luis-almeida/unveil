@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Filtrify">
+        <meta name="keywords" content="javascript, jquery, lazy load, performance, plugin" />
+        <meta name="author" content="Luís Almeida">
+        <meta name="viewport" content="width=device-width">
         <title>jQuery Unveil - A very lightweight plugin to lazy load images</title>
     </head>
-    
+
     <style>
-    
+
     body {
-        text-align: center;
-        background: #121416;
-        font-family: sans-serif;
-        color: white;
-        padding: 50px 0;
+        background: #FFF;
+        color: #555;
+        font-family: "Helvetica Neue", sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        padding: 30px 30px 300px 30px;
+        margin: 0 auto;
+        max-width: 480px;
     }
-    h1 {
-        margin-bottom: 60px;
-        font: italic bold 3em serfif;
-        text-shadow: 0 0 1px #17EB00;
-        color: #17EB00;
+    header {
+        margin: 100px 0;
+    }
+    header p {
+        color: #CCC;
+        margin: 0 0 25px 0;
+    }
+    header h1 {
+        color: #000;
+        font-size: 75px;
+        line-height: 1;
+        margin: 0 0 10px 0;
+    }
+    header h1 small{
+        font-size: 16px;
     }
     h2 {
-        margin-top: 60px;
-        margin-bottom: 20px;
-        font-size: 1.1em;
-        color: #6C816A;
+        color: #333;
+        margin-top: 100px;
+        font-size: 1em;
     }
     p {
-        margin: 5px auto;
-        max-width: 600px;
-        color: #F5F5F5;
-        font-size: .9em;
-        line-height: 1.2;
+        margin: 15px auto;
     }
     a {
         color: #3595b5;
     }
     strong {
         font-size: 1.5em;
-        color: white;
+        color: #CCC;
     }
     code {
-        background: black;
-        margin: 20px 0 0 0;
-        padding: 5px 10px;
-        display: inline-block;
-        border-radius: 5px;
     }
     code > span.red {
         color: #D14;
@@ -54,99 +63,112 @@
     }
     ul {
         list-style: none;
-        margin: 50px 0;
         padding: 0;
     }
     ul > li {
-        display: block;
-        margin: 30px auto;
-        position: relative;
+        margin-top: 50px;
+        text-align: center;
     }
-    ul > li > img { 
-        width: 600px;
-        height: 400px;
-        background: #FFF;
-        border: 10px solid #FFF;
+    ul > li > img {
+        display: inline-block;
+        max-width: 100%;
     }
-    ul > li:after {
-        position: absolute;
-        top: 0; bottom: 0;
-        left: 0; right: 0;
-        background: #000;
-        z-index: 1;
+
+    .twitter-share-button {
+        margin-left: 20px;
     }
-    
-    iframe {
-        margin: 30px 0 40px 0;
-    }
-    
+
     </style>
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="jquery.unveil.js"></script>
-    
+
     <script>
-        $(function(){
-            $("li img").unveil();
-        });
+    $(function() {
+        $("li img").unveil(300);
+    });
     </script>
-    
+
     <body>
-    
-    <h1>unveil.js</h1>
-    
-    <p>Most of us are familiar with the <a target="_blank" href="http://www.appelsiini.net/projects/lazyload">Lazy Load</a> plugin by <a target="_blank" href="http://www.appelsiini.net/">Mika Tuupola</a>.  
+
+    <header>
+        <h1>Unveil<small>.js</small></h1>
+        <p>Lightway version of Lazy Load with support for serving<br> high-resolution images to devices with retina displays</p>
+
+        <iframe src="http://ghbtns.com/github-btn.html?user=luis-almeida&repo=unveil&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="55" height="20"></iframe>
+        <iframe src="http://ghbtns.com/github-btn.html?user=luis-almeida&repo=unveil&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="55" height="20"></iframe>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="unveil.js - A very lightweight plugin to lazy load images" data-via="lmgalmeida" data-related="lmgalmeida" data-count="none">Tweet</a>
+    </header>
+
+    <p>Most of us are familiar with the <a target="_blank" href="http://www.appelsiini.net/projects/lazyload">Lazy Load</a> plugin by <a target="_blank" href="http://www.appelsiini.net/">Mika Tuupola</a>.
     <p>This plugin is very useful and it boosts performance delaying loading of images in long web pages because images outside of viewport (visible part of web page) won't be loaded until the user scrolls to them.</p>
     <p>Lazy Load has some cool options such as custom effects, container, events or data attribute. If you're not gonna use any of them you can reduce the file size by leaving just the essential code to show the images.</p>
-    <p>That's what I did and this is my lightweight version of Lazy Load - <strong>less than 0.5kb</strong>.</p> 
-    
-    <a href="https://twitter.com/share" class="twitter-share-button" data-text="unveil.js - A very lightweight plugin to lazy load images" data-via="lmgalmeida" data-related="lmgalmeida" data-count="none">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <p>That's what I did and this is my lightweight version of Lazy Load with support for serving high-resolution images to devices with retina displays - <strong>less than 1k</strong>.</p>
 
-    
     <h2>Usage</h2>
-    <p>Include the actual image source in a "data-src" attribute.</p>
-    <p>Use a placeholder image in the src attribute, something to be displayed while the original image loads.</p>
-    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img.jpg"</span> /></code><br>
-    <code>$(<span class="red">"img"</span>).unveil();</code>
-    
-    <h2>Option</h2>
-    <p>By default, images are only loaded and "unveiled" when user scrolls to them and they became visible on the screen.</p>
-    <p>If you want your images to load earlier than that, lets say 200px before they get visible, you just have to:</p>
-    <code>$(<span class="red">"img"</span>).unveil( <span class="blue">200</span> );</code>
-    
+    <p>Use a placeholder image in the src attribute - something to be displayed while the original image loads - and include the actual image source in a "data-src" attribute.</p>
+    <p>If you want to serve high-resolution images to devices with retina displays, you just have to include the source for those images in a "data-src-retina" attribute.</p>
+    <p>You don't need to include a "data-src-retina" attribute in all the image tags, unveil is smart enough to fallback to "data-src" or even do nothing in case there isn't any "data-src" specified.</p>
+    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img1.jpg"</span> /></code>
+    <br>
+    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img2.jpg"</span> <span class="blue">data-src-retina=</span><span class="red">"img2-retina.jpg"</span> /></code>
+    <br>
+    <p>If you care about users without javascript enabled, you can include the original image inside a &lt;noscript&gt; tag:</p>
+    <code>&lt;noscript&gt;<br>&nbsp;&nbsp;&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img1.jpg"</span> /><br>&lt;/noscript&gt;</code>
+    <br><br>
+    <p>Run the script on document ready:</p>
+    <code>$(<span class="blue">document</span>).ready(<span class="blue">function</span>() {<br>
+    &nbsp;&nbsp;$(<span class="red">"img"</span>).unveil();<br>
+    });</code>
+
+    <h2>Options</h2>
+    <p>By default, images are only loaded and "unveiled" when the user scrolls to them and they became visible on the screen.</p>
+    <p>If you want your images to load earlier than that, lets say 200px before they appear on the screen, you just have to:</p>
+    <code>$(<span class="red">"img"</span>).unveil(<span class="blue">200</span>);</code>
+
     <h2>Trigger</h2>
     <p>You can still trigger image loading whenever you need.</p>
     <p>All you have to do is select the images you want to "unveil" and trigger the event:</p>
-    <code>$(<span class="red">"img"</span>).trigger( <span class="blue">"unveil"</span> );</code>
-    
-    <h2>Download</h2>
-    <p>Download the last version from the project page on <a href="https://github.com/luis-almeida/unveil">GitHub</a>.</p>
-    
+    <code>$(<span class="red">"img"</span>).trigger(<span class="blue">"unveil"</span>);</code>
+
     <h2>Demo</h2>
+    <p>The images were taken from the The Fox is Black <a href="http://www.thefoxisblack.com/category/the-desktop-wallpaper-project/">Desktop Wallpaper Project</a> - cool stuff!</p>
+    <p>If you're on a "normal" display, unveil will load the low resolution version (800x500). In case you're on a device with a retina display, the high resolution version (1280x800 in this case) will be loaded instead.</p>
     <p>Scroll down to see it working.</p>
-    
+
     <ul>
-        <li><img src="img/bg.png" data-src="img/img1.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img2.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img3.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img4.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img5.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img6.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img7.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img8.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img9.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img10.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img11.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img12.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img13.jpg" /></li>
-        <li><img src="img/bg.png" data-src="img/img14.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/anti-bullying-tom-froese-wallpaper-800x500.jpg" data-src-retina="img/anti-bullying-tom-froese-wallpaper-1280x800.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/brock-davis-wallpaper-800x500.jpg" data-src-retina="img/brock-davis-wallpaper-1280x800.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/dark-igloo-wallpaper-800x500.jpg" data-src-retina="img/dark-igloo-wallpaper-800x500.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/dark-igloo-wallpaper-1-800x500.jpg" data-src-retina="img/dark-igloo-wallpaper-1-800x500.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/iceland-smojr-wallpaper-800x500.jpg" data-src-retina="img/iceland-smjor-wallpaper-1280x800.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/james-olstein-wallpaper-800x500.jpg" data-src-retina="img/james-olstein-wallpaper-1200x800.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/johanna-basford-wallpaper-800x500.jpg" data-src-retina="img/johanna-basford-wallpaper-1280x800.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/Jude_Landry_Wallpaper_800x500.jpg" data-src-retina="img/Jude_Landry_Wallpaper_1280x800.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/julieta-felix-wallpaper-800x500.jpg" data-src-retina="img/julieta-felix-wallpaper-1280x800.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/Timothy-J-Reynolds-wallpaper-800x500.jpg" data-src-retina="img/Timothy-J-Reynolds-wallpaper-1200x800.jpg" /></li>
+        <li><img src="img/loader.gif" data-src="img/haik-avanian-wallpaper-800x500.jpg" data-src-retina="img/haik-avanian-wallpaper-1280x800.jpg" /></li>
     </ul>
-        
-    
-    <a href="http://github.com/luis-almeida"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://a248.e.akamai.net/camo.github.com/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
-    
+
+    <h2>Download</h2>
+    <p>Download the script from the project page on <a href="https://github.com/luis-almeida/unveil">GitHub</a>.</p>
+    <p>If you have any suggestion or bug to report please use github issues or get it touch with me on twitter - <a href="https://twitter.com/lmgalmeida">@lmgalmeida</a>.</p>
+
+    <h2>License</h2>
+    <p>Unveil is licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
+
     <script>
+    // Twitter
+    !function(d,s,id){
+        var js,fjs=d.getElementsByTagName(s)[0];
+        if(!d.getElementById(id)){
+            js=d.createElement(s);
+            js.id=id;
+            js.src="//platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js,fjs);
+        }
+    }(document,"script","twitter-wjs");
+    // Analytics
     var _gaq=[['_setAccount','UA-30936310-1'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
