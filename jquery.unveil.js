@@ -10,9 +10,9 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold) {
+  $.fn.unveil = function(threshold, target) {
 
-    var $w = $(window),
+    var $w = target ? $(target) : $(window),
         th = threshold || 0,
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
@@ -29,8 +29,9 @@
 
     function unveil() {
       inview = images.filter(function() {
-        var $e = $(this),
-            wt = $w.scrollTop(),
+        var $e = $(this),  
+            wo = $w.offset() ? $w.offset().top : 0,
+            wt = $w.scrollTop() + wo,
             wb = wt + $w.height(),
             et = $e.offset().top,
             eb = et + $e.height();
