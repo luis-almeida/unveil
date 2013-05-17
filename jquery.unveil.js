@@ -29,14 +29,19 @@
 
     function unveil() {
       inview = images.filter(function() {
-        var $e = $(this),  
+        var $e = $(this),
             wo = $w.offset() ? $w.offset().top : 0,
+            wlo = $w.offset() ? $w.offset().left : 0,
             wt = $w.scrollTop() + wo,
+            wlt = $w.scrollLeft() + wlo,
             wb = wt + $w.height(),
+            wlb = wlt + $w.width(),
             et = $e.offset().top,
-            eb = et + $e.height();
+            el = $e.offset().left,
+            eb = et + $e.height(),
+            elb = el + $e.width();
 
-        return eb >= wt - th && et <= wb + th;
+        return eb >= wt - th && et <= wb + th && elb >= wlt - th && el <= wlb + th;
       });
 
       loaded = inview.trigger("unveil");
