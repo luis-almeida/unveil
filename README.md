@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 ###Option
 By default, images are only loaded and "unveiled" when user scrolls to them and they became visible on the screen.
-If you want your images to load earlier than that, lets say 200px before they appear in the viewport, you just have to:
+If you want your images to load earlier than that, lets say 200px before they appear on the screen, you just have to:
 ```javascript
 $("img").unveil( 200 );
 ```
