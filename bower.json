@@ -1,0 +1,5 @@
+{
+  "name": "jquery-unveil",
+  "version": "1.0.0",
+  "main": ["jquery.unveil.js"]
+}
