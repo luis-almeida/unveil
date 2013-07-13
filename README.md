@@ -23,7 +23,7 @@ You don't need to include a "data-src-retina" attribute in all the image tags, u
 If you care about users without javascript enabled, you can include the original image inside a ```noscript``` tag:
 ```html
 <noscript>
-  <img src="bg.png" src="img1.jpg" />
+  <img src="img1.jpg" />
 </noscript>
 ```
 Run the script on document ready:
