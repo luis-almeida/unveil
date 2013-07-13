@@ -58,5 +58,9 @@ Visit [project page](http://luis-almeida.github.com/unveil/) to see it working.
 
 
 
+###Browser support
+Compatible with All Browsers and IE7+.
+
+
 ###License
 Unveil is licensed under the [MIT license](http://opensource.org/licenses/MIT).
