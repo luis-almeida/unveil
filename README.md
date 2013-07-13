@@ -1,5 +1,5 @@
 #unveil.js
-###A very lightweight plugin to lazy load images
+###A very lightweight plugin to lazy load images for jQuery or Zepto.js
 
 
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
 By default, images are only loaded and "unveiled" when user scrolls to them and they became visible on the screen.
 If you want your images to load earlier than that, lets say 200px before they appear on the screen, you just have to:
 ```javascript
-$("img").unveil( 200 );
+$("img").unveil(200);
 ```
 
 
