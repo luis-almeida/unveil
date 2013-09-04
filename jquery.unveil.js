@@ -10,10 +10,11 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold) {
+  $.fn.unveil = function(threshold, options) {
 
     var $w = $(window),
         th = threshold || 0,
+        opt = $.extend({transition: 0, callback: function(){}}, options),
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
         images = this,
@@ -24,7 +25,13 @@
     this.one("unveil", function() {
       source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
-      if (source) this.setAttribute("src", source);
+      if (source) {
+          var $img = $(this);
+          $('<img/>', {src: source}).bind('load', function(){
+              $img.css('opacity',0).attr('src', source).animate({opacity:1}, opt.transition);
+              opt.callback($img);
+          });
+      }
     });
 
     function unveil() {
