@@ -35,6 +35,7 @@
             et = $e.offset().top,
             eb = et + $e.height();
 
+        if ($e.is(':hidden')) return;
         return eb >= wt - th && et <= wb + th;
       });
 
