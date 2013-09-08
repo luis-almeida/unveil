@@ -17,18 +17,16 @@
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
         images = this,
-        loaded,
-        inview,
-        source;
+        loaded;
 
     this.one("unveil", function() {
-      source = this.getAttribute(attrib);
+      var source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
       if (source) this.setAttribute("src", source);
     });
 
     function unveil() {
-      inview = images.filter(function() {
+      var inview = images.filter(function() {
         var $e = $(this),
             wt = $w.scrollTop(),
             wb = wt + $w.height(),
