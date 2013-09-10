@@ -61,6 +61,9 @@
     code > span.blue {
         color: #099;
     }
+    code > span.purple {
+        color: #C0C;
+    }
     ul {
         list-style: none;
         padding: 0;
@@ -122,10 +125,24 @@
     &nbsp;&nbsp;$(<span class="red">"img"</span>).unveil();<br>
     });</code>
 
-    <h2>Option</h2>
+    <h2>Threshold</h2>
     <p>By default, images are only loaded and "unveiled" when the user scrolls to them and they became visible on the screen.</p>
     <p>If you want your images to load earlier than that, lets say 200px before they appear on the screen, you just have to:</p>
-    <code>$(<span class="red">"img"</span>).unveil(<span class="blue">200</span>);</code>
+    <code>$(<span class="red">"img"</span>).unveil(<span class="purple">200</span>);</code>
+
+    <h2>Callback</h2>
+    <p>As a second parameter you can also specify a callback function that will fire after an image as been "unveiled".</p>
+    <p>Inside the callback function <code>this</code> refers to the image's DOM node, so with the help of CSS3 (or jQuery animations) and by attaching a simple load event you can easily add some fancy entrance animation to your images:</p>
+    <code><span class="blue">img</span> {<br>
+    &nbsp;&nbsp;opacity: 0;<br>
+    &nbsp;&nbsp;transition: opacity .3s ease-in;<br>
+    }</code>
+    <br><br>
+    <code>$(<span class="red">"img"</span>).unveil(<span class="purple">200</span>, <span class="blue">function</span>() {<br>
+    &nbsp;&nbsp;$(this).load(<span class="blue">function</span>() {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;this.style.opacity = 1;<br>
+    &nbsp;&nbsp;});<br>
+    });</code>
 
     <h2>Trigger</h2>
     <p>You can still trigger image loading whenever you need.</p>

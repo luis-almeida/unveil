@@ -35,11 +35,29 @@ $(document).ready(function() {
 
 
 
-###Option
-By default, images are only loaded and "unveiled" when user scrolls to them and they became visible on the screen.
+###Threshold
+By default, images are only loaded and "unveiled" when the user scrolls to them and they became visible on the screen.
 If you want your images to load earlier than that, lets say 200px before they appear on the screen, you just have to:
 ```javascript
 $("img").unveil(200);
+```
+
+
+###Callback
+As a second parameter you can also specify a callback function that will fire after an image as been "unveiled".
+Inside the callback function ```this``` refers to the image's DOM node, so with the help of CSS3 (or jQuery animations) and by attaching a simple load event you can easily add some fancy entrance animation to your images:
+```css
+img {
+  opacity: 0;
+  transition: opacity .3s ease-in;
+}
+```
+```javascript
+$("img").unveil(200, function() {
+  $(this).load(function() {
+    this.style.opacity = 1;
+  });
+});
 ```
 
 
@@ -48,7 +66,7 @@ $("img").unveil(200);
 You can still trigger image loading whenever you need.
 All you have to do is select the images you want to "unveil" and trigger the event:
 ```javascript
-$("img").trigger( "unveil" );
+$("img").trigger("unveil");
 ```
 
 
