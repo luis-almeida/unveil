@@ -45,6 +45,7 @@
 
     $w.scroll(unveil);
     $w.resize(unveil);
+	$w.load(unveil);
 
     unveil();
 
