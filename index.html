@@ -88,9 +88,9 @@
     <script src="jquery.unveil.js"></script>
 
     <script>
-    $(function() {
-        $("li img").unveil(300);
-    });
+    // $(function() {
+    //     $("li img").unveil(300);
+    // });
     </script>
 
     <body>
@@ -177,6 +177,16 @@
 
     <h2>License</h2>
     <p>Unveil is licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
+
+
+    <script src="unveil.js"></script>
+    <script>
+    var unveil = new Unveil("img", 0, function() {
+      this.addEventListener("load", function() {
+        this.style.opacity = 1;
+      });
+    });
+    </script>
 
     <script>
     // Twitter
