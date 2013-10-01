@@ -14,7 +14,8 @@
 
     var $w = $(window),
         defaults = {
-          threshold: 0
+          threshold: 0,
+          throttle: 0
         };
 
     options = $.extend(defaults, options);
@@ -23,7 +24,8 @@
         retina = window.devicePixelRatio > 1,
         attrib = retina ? "data-src-retina" : "data-src",
         images = this,
-        loaded, 
+        loaded,
+        timer,
         wh, 
         eh;
 
@@ -41,7 +43,7 @@
       unveil();
     }
 
-    function unveil() {
+    function filterImages() {
       var inview = images.filter(function() {
         var $e = $(this);
         if ($e.is(":hidden")) return;
@@ -60,6 +62,17 @@
 
       loaded = inview.trigger("unveil");
       images = images.not(loaded);
+    }
+
+    function unveil() {
+      if (options.throttle) {
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            filterImages();
+          }, options.throttle);
+      } else {
+        filterImages();
+      }
     }
 
     $w.scroll(unveil);
