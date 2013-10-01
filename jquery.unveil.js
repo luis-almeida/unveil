@@ -23,7 +23,9 @@
         retina = window.devicePixelRatio > 1,
         attrib = retina ? "data-src-retina" : "data-src",
         images = this,
-        loaded;
+        loaded, 
+        wh, 
+        eh;
 
     this.one("unveil", function() {
       var source = this.getAttribute(attrib);
@@ -34,13 +36,22 @@
       }
     });
 
+    function onResize() {
+      wh = $w.height();
+      unveil();
+    }
+
     function unveil() {
       var inview = images.filter(function() {
         var $e = $(this);
         if ($e.is(":hidden")) return;
 
+        if (!wh) {
+          wh = $w.height();
+        }
+
         var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
+            wb = wt + wh,
             et = $e.offset().top,
             eb = et + $e.height();
 
