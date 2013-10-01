@@ -89,7 +89,9 @@
 
     <script>
     $(function() {
-        $("li img").unveil(300);
+        $("li img").unveil({
+            threshold: 2000
+        });
     });
     </script>
 
@@ -128,7 +130,7 @@
     <h2>Threshold</h2>
     <p>By default, images are only loaded and "unveiled" when the user scrolls to them and they became visible on the screen.</p>
     <p>If you want your images to load earlier than that, lets say 200px before they appear on the screen, you just have to:</p>
-    <code>$(<span class="red">"img"</span>).unveil(<span class="purple">200</span>);</code>
+    <code>$(<span class="red">"img"</span>).unveil(<br>&nbsp;&nbsp;threshold: <span class="purple">200</span><br>});</code>
 
     <h2>Callback</h2>
     <p>As a second parameter you can also specify a callback function that will fire after an image as been "unveiled".</p>
@@ -138,7 +140,7 @@
     &nbsp;&nbsp;transition: opacity .3s ease-in;<br>
     }</code>
     <br><br>
-    <code>$(<span class="red">"img"</span>).unveil(<span class="purple">200</span>, <span class="blue">function</span>() {<br>
+    <code>$(<span class="red">"img"</span>).unveil({<br>&nbsp;&nbsp;threshold: <span class="purple">200</span><br>}, <span class="blue">function</span>() {<br>
     &nbsp;&nbsp;$(this).load(<span class="blue">function</span>() {<br>
     &nbsp;&nbsp;&nbsp;&nbsp;this.style.opacity = 1;<br>
     &nbsp;&nbsp;});<br>

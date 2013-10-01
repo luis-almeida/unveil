@@ -10,12 +10,18 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(options, callback) {
 
     var $w = $(window),
-        th = threshold || 0,
+        defaults = {
+          threshold: 0
+        };
+
+    options = $.extend(defaults, options);
+
+    var $w = $(window),
         retina = window.devicePixelRatio > 1,
-        attrib = retina? "data-src-retina" : "data-src",
+        attrib = retina ? "data-src-retina" : "data-src",
         images = this,
         loaded;
 
@@ -38,7 +44,7 @@
             et = $e.offset().top,
             eb = et + $e.height();
 
-        return eb >= wt - th && et <= wb + th;
+        return eb >= wt - options.threshold && et <= wb + options.threshold;
       });
 
       loaded = inview.trigger("unveil");
