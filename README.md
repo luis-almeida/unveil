@@ -60,7 +60,20 @@ $("img").unveil(200, function() {
 });
 ```
 
+###Options
+As a third parameter you can also specifiy additional options that configure the lazy loading.
 
+####Search Box
+`scrollBox` is a jQuery DOM reference that points to the HTML element that contains the scroll bar.  Remember CSS can apply a scroll bar to any HTML element, so this allows more advanced designs to be supported.
+
+Default is the window object which is the default browser scroll bar
+
+```css
+.myscroller { position: absolute; overflow: scroll; overflow-x: hidden; top: 0; right: 0; bottom: 0; left: 0;}
+```
+```javascript
+$(container).unveil(undefined, undefined { "scrollBox": $(".myscroller") });
+```
 
 ###Trigger
 You can still trigger image loading whenever you need.
