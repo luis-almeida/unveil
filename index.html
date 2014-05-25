@@ -149,8 +149,13 @@
     <p>All you have to do is select the images you want to "unveil" and trigger the event:</p>
     <code>$(<span class="red">"img"</span>).trigger(<span class="red">"unveil"</span>);</code>
 
-    <h2>Off</h2>
-    <p>You can also remove all the "unveil" event handlers from "window":</p>
+    <h2>Lookup</h2>
+    <p>It is also possible to lookup for images in the viewport that haven't been "unveiled" yet.</p>
+    <p>This can be useful, for instance, in case of a tabbed layout.</p>
+    <code>$(<span class="blue">window</span>).trigger(<span class="red">"lookup"</span>);</code>
+
+    <h2>Cancel</h2>
+    <p>You can remove all the "unveil" event handlers from "window":</p>
     <code>$(<span class="blue">window</span>).off(<span class="red">"unveil"</span>);</code>
 
     <h2>Demo</h2>
