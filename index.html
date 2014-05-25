@@ -149,6 +149,10 @@
     <p>All you have to do is select the images you want to "unveil" and trigger the event:</p>
     <code>$(<span class="red">"img"</span>).trigger(<span class="red">"unveil"</span>);</code>
 
+    <h2>Off</h2>
+    <p>You can also remove all the "unveil" event handlers from "window":</p>
+    <code>$(<span class="blue">window</span>).off(<span class="red">"unveil"</span>);</code>
+
     <h2>Demo</h2>
     <p>The images were taken from the The Fox is Black <a href="http://www.thefoxisblack.com/category/the-desktop-wallpaper-project/">Desktop Wallpaper Project</a> - cool stuff!</p>
     <p>If you're on a "normal" display, unveil will load the low resolution version (800x500). In case you're on a device with a retina display, the high resolution version (1280x800 in this case) will be loaded instead.</p>
