@@ -45,8 +45,8 @@
       images = images.not(loaded);
     }
 
-    $w.scroll(unveil);
-    $w.resize(unveil);
+    $w.on('scroll.unveil', unveil);
+    $w.on('resize.unveil', unveil);
 
     unveil();
 
