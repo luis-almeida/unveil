@@ -10,9 +10,9 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(threshold, callback, element) {
 
-    var $w = $(window),
+    var $w = element ? $(element) : $(window),
         th = threshold || 0,
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
@@ -35,7 +35,7 @@
 
         var wt = $w.scrollTop(),
             wb = wt + $w.height(),
-            et = $e.offset().top,
+            et = $e.offset().top + (element ? wt - $w.offset().top: 0),
             eb = et + $e.height();
 
         return eb >= wt - th && et <= wb + th;
