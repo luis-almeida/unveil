@@ -1,31 +1,27 @@
-/**
- * jQuery Unveil
- * A very lightweight jQuery plugin to lazy load images
- * http://luis-almeida.github.com/unveil
- *
- * Licensed under the MIT license.
- * Copyright 2013 Luís Almeida
- * https://github.com/luis-almeida
- */
+// Licensed under the MIT license.
+// Copyright 2014 Luís Almeida
+// https://github.com/luis-almeida/unveil
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(opts) {
+
+    opts = opts || {};
 
     var $w = $(window),
-        th = threshold || 0,
+        $c = opts.container || $w,
+        th = opts.threshold || 0,
+        wh = $w.height(),
         retina = window.devicePixelRatio > 1,
-        attrib = retina? "data-src-retina" : "data-src",
+        attrib = retina ? "data-src-retina" : "data-src",
         images = this,
         loaded;
 
     this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
-      source = source || this.getAttribute("data-src");
-      if (source) {
-        this.setAttribute("src", source);
-        if (typeof callback === "function") callback.call(this);
-      }
+      if (opts.custom) return;
+      var $img = $(this), src = $img.attr(attrib);
+      src = src || $img.attr("data-src");
+      if (src) $img.attr("src", src).trigger("unveiled");
     });
 
     function unveil() {
@@ -34,8 +30,9 @@
         if ($e.is(":hidden")) return;
 
         var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
+            wb = wt + wh,
+            ct = $c !== $w ? wt - $c.offset().top : 0,
+            et = $e.offset().top + ct,
             eb = et + $e.height();
 
         return eb >= wt - th && et <= wb + th;
@@ -45,7 +42,24 @@
       images = images.not(loaded);
     }
 
-    $w.on("scroll.unveil resize.unveil lookup.unveil", unveil);
+    function resize() {
+      wh = $w.height();
+      unveil();
+    }
+
+    function debounce(fn) {
+      var timer;
+      return function() {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(fn, opts.debounce || 0);
+      };
+    }
+
+    $c.on({
+      "resize.unveil": debounce(resize),
+      "scroll.unveil": debounce(unveil),
+      "lookup.unveil": unveil
+    });
 
     unveil();
 
