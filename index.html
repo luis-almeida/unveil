@@ -1,203 +1,185 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="description" content="Filtrify">
-        <meta name="keywords" content="javascript, jquery, lazy load, performance, plugin" />
-        <meta name="author" content="Luís Almeida">
-        <meta name="viewport" content="width=device-width">
-        <title>jQuery Unveil - A very lightweight plugin to lazy load images</title>
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Filtrify">
+    <meta name="keywords" content="javascript, jquery, lazy load, performance, plugin" />
+    <meta name="author" content="Luís Almeida">
+    <meta name="viewport" content="width=device-width">
+    <title>jQuery Unveil - A very lightweight plugin to lazy load images</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/github.min.css">
+  </head>
 
-    <style>
-
-    body {
-        background: #FFF;
-        color: #555;
-        font-family: "Helvetica Neue", sans-serif;
-        font-weight: 300;
-        line-height: 1.7;
-        padding: 30px 30px 300px 30px;
-        margin: 0 auto;
-        max-width: 480px;
-    }
-    header {
-        margin: 100px 0;
-    }
-    header p {
-        color: #CCC;
-        margin: 0 0 25px 0;
-    }
-    header h1 {
-        color: #000;
-        font-size: 75px;
-        line-height: 1;
-        margin: 0 0 10px 0;
-    }
-    header h1 small{
-        font-size: 16px;
-    }
-    h2 {
-        color: #333;
-        margin-top: 100px;
-        font-size: 1em;
-    }
-    p {
-        margin: 15px auto;
-    }
-    a {
-        color: #3595b5;
-    }
-    strong {
-        font-size: 1.5em;
-        color: #CCC;
-    }
-    code {
-    }
-    code > span.red {
-        color: #D14;
-    }
-    code > span.blue {
-        color: #099;
-    }
-    code > span.purple {
-        color: #C0C;
-    }
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-    ul > li {
-        margin-top: 50px;
-        text-align: center;
-    }
-    ul > li > img {
-        display: inline-block;
-        max-width: 100%;
-        min-width: 48px;
-        min-height: 48px;
-        background-repeat: no-repeat;
-        background-image: url(data:image/gif;base64,R0lGODlhMAAwAPcAAAAAABMTExUVFRsbGx0dHSYmJikpKS8vLzAwMDc3Nz4+PkJCQkRERElJSVBQUFdXV1hYWFxcXGNjY2RkZGhoaGxsbHFxcXZ2dnl5eX9/f4GBgYaGhoiIiI6OjpKSkpaWlpubm56enqKioqWlpampqa6urrCwsLe3t7q6ur6+vsHBwcfHx8vLy8zMzNLS0tXV1dnZ2dzc3OHh4eXl5erq6u7u7vLy8vf39/n5+f///wEBAQQEBA4ODhkZGSEhIS0tLTk5OUNDQ0pKSk1NTV9fX2lpaXBwcHd3d35+foKCgoSEhIuLi4yMjJGRkZWVlZ2dnaSkpKysrLOzs7u7u7y8vMPDw8bGxsnJydvb293d3eLi4ubm5uvr6+zs7Pb29gYGBg8PDyAgICcnJzU1NTs7O0ZGRkxMTFRUVFpaWmFhYWVlZWtra21tbXNzc3V1dXh4eIeHh4qKipCQkJSUlJiYmJycnKampqqqqrW1tcTExMrKys7OztPT09fX19jY2Ojo6PPz8/r6+hwcHCUlJTQ0NDg4OEFBQU9PT11dXWBgYGZmZm9vb3Jycnp6en19fYCAgIWFhaurq8DAwMjIyM3NzdHR0dTU1ODg4OTk5Onp6fDw8PX19fv7+xgYGB8fHz8/P0VFRVZWVl5eXmpqanR0dImJiaCgoKenp6+vr9/f3+fn5+3t7fHx8QUFBQgICBYWFioqKlVVVWJiYo+Pj5eXl6ioqLa2trm5udbW1vT09C4uLkdHR1FRUVtbW3x8fJmZmcXFxc/Pz42Njb+/v+/v7/j4+EtLS5qamri4uL29vdDQ0N7e3jIyMpOTk6Ojo7GxscLCwisrK1NTU1lZWW5ubkhISAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/i1NYWRlIGJ5IEtyYXNpbWlyYSBOZWpjaGV2YSAod3d3LmxvYWRpbmZvLm5ldCkAIfkEAAoA/wAsAAAAADAAMAAABv/AnHBILBqPyKRySXyNSC+mdFqEAAARqpaIux0dVwduq2VJLN7iI3ys0cZkosogIJSKODBAXLzJYjJpcTkuCAIBDTRceg5GNDGAcIM5GwKWHkWMkjk2kDI1k0MzCwEBCTBEeg9cM5AzoUQjAwECF5KaQzWQMYKwNhClBStDjEM4fzGKZCxRRioFpRA2OXlsQrqAvUM300gsCgofr0UWhwMjQhgHBxhjfpCgeDMtLtpCOBYG+g4lvS8JAQZoEHKjRg042GZsylHjBYuHMY7gyHBAn4EDE1ZI8tCAhL1tNLoJsQGDxYoVEJHcOPHAooEEGSLmKKjlWIuHKF/ES0IjxAL/lwxCfFRCwwVKlC4UTomxIYFFaVtKomzBi8yKCetMkKnxEIZIMjdKdBi6ZIYyWAthSZGUVu0RGRsyyJ07V0SoGC3yutCrN40KcIADK6hAlgmLE4hNIF58QlmKBYIDV2g75bBixouVydCAAUOGzp87h6AsBQa9vfTy0uuFA86Y1m5jyyaDQwUJ0kpexMC95AWHBw9YkJlBYoSKs1RmhJDgoIGDDIWN1BZBvUSLr0psmKDgoLuDCSZ4G4FhgrqIESZeFMbBAsOD7g0ifJBxT7wkGyxImB+Bgr7EEA8418ADGrhARAodtKCEDNYRQYNt+wl3RAfNOWBBCr3MkMEEFZxg3YwkLXjQQQg7URPDCSNQN8wRMEggwQjICUECBRNQoIIQKYAAQgpCvOABBx2ksNANLpRQQolFuCBTETBYQOMHaYxwwQV2UVMCkPO1MY4WN3wwwQQWNJPDCJ2hI4QMH3TQQXixsVDBlyNIIiUGZuKopgdihmLDBjVisOWYGFxQJ0MhADkCdnGcQCMFHsZyAQZVDhEikCtOIsMFNXKAHZmQ9kFCBxyAEGNUmFYgIREiTDmoEDCICMKfccQAgghpiRDoqtSkcAKsk7RlK51IiAcLCZ2RMJsWRbkw6rHMFhEEACH5BAAKAP8ALAAAAAAwADAAAAf/gDmCg4SFhoeIiYqLhFhRUViMkpOFEwICE5SahDg4hjgSAQJEh16em4ctRklehkQBAaSFXhMPVaiFVwoGPyeFOK+xp4MkOzoCVLiDL7sGEF2cwbKDW0A6Oj0tyoNOBt5PhUQCwoRL1zpI29QO3gxZhNLDLz7XP1rqg1E/3kmDwLDTcBS5tgMcPkG0vCW4MkjaICoBrgmxgcrFO0NWEnib0OofORtDrvGYcqhTIhcOHIjgYgiJtx9RcuBQEiSIEkFPjOnIZMiGFi3DCiVRQFTClFaDsDDg1UQQDhs2kB4x1uPFrC1ZsrL8tCQIUQVBMLgY9uSBFKSGvEABwoSQFy5Z/7NqgVZqygSvRIU0uSeTrqIuSHF00RI3yxa0iLqIePBVwYMoQSX5LKyF4qQsTIR8NYJYEla5XSIzwnHFSBAGtzZ5IcylsyYvJ564lmz5oO3buAttabKEie/fS5bE3LYFi/Hjx7MgtZKyefMhQzCIpvTiipUr2LNjp8vcuXck0ydVt649O90tTIIrUbKEfXsS4T0jn6+ck0x/8XPr34/Dyon8iRimDhZOFFGBC6hwMcUULfhFCRckGFHEBEUwAeAvLUhxwglUYDFbXRgUMeEEGExxYSFaULHhhlUApQgOLSwh4gQTGCECXyYtMowNL6i44hVcTIcDCRXQOEEFTVg1SPAVT0SSyBZVKClIFy1MIYWGUzhpyBM0FpGEFYhxscQRSKTmiTwkiCBFbTJt4d+GCB6CxRFHROGgTFLQiYQ2OVxBAgkM5ZAFFCKIECgnWVBBBZuFvMBXIVkkcQQGIpwiRXBSOFVFoSRsVYgNd0qCwxMYHJHERTlcykSmgkBYaBUnStICEhhgIMUwly7BqiBXFAoFqurY0ASdS3iaam+75mCDFIWe8KEmVJSKQWqD5JpsDi8QCoWUymwxJgZOMGrtL1QUaqc6WShBJreCjItimlEYi4sWUNxqiLu5WCHvNtPhu98iJ/hG0r+MdGFcqAQTHAgAIfkEAAoA/wAsAAAAADAAMAAACP8AcwgcSLCgwYMIEypcSDALHjxZGEqcWNCNAQNvKGokGCjQQTYX2Ry84XHjQT4a5JQk2CakwRtu1OQxWXCPAwVlqhQMBNJAm5UCoxAIcEAnTYF+bipYU4NjSwNsgP5pEIAon6MD6yjYeqdgzzYF5QgIIAAO1oF/0mxFI4NgT5ED/YypuqDtWYFSFmyVMzDQ06gCA7kZO8DO3YGA2mw1c1Xg24FVxIxFA8hkH7sF9TTY+uZGDr8XweYAhKaqGCoH96BG2CeNmihNOTLZugCFQCYOHDARaGcAWdEEZ2QYIMCoQTlmcrep4nlgljM4RQQGBKi5Bt9j+hAEVAcBgO9ngAb/pnMmt4MzcLQPtMOmiviBN6KU4RuYSoMv3wF8UdN8ZxU35jkQAR0zCHRDZQvVUFIfaoCRHwBk3PEeQTVEoUaAa+AxYUI3xEHAg2HE8cdEM8yBRm5mZNCfRDWQkR8Ya6inEUoOoKGHSXZ88UUDVGzI0A0oSGgSIG/UseJhG/k4kZJIolUHHXQ8CeWUGmIFyB9YZvlHDVuWpMcaa6ihRphgihkHkwr9kcWabLbZ3B5hihnnmGowgWZCM7SpZxYIzkDHHHP8CeigUpzFpZaIirfSnU026ihHexi30QyxHZVFHW9k4IdJNeyhhx8IalSDFHC8YWodjA7Uhx6s7iEDozdU/8HEG26YGoekE/3hKat68FGgQoHwMYeptGogxYiBaXRDFp7mwSqoCAUiRQbEZiBCRAPtIQW2CP2hB2aj+cErq+ASZAexcuwBVA11MJFuXytlgQIezBX0x6qscltQFnDEQUWoA1HBhLvq8YECCurNMC8Km+40wx57HNnQrwXJMMfAUngUSBUiiGBUIHs8REWl2wG8pBRMxDEHZhx7XFINVOCBgrpN9iHHwJK2LGkfD6FA8Vk32DFwHSTrTNANMeOhR6oJ6THwuwQZ3VDP+tL0Bx0D33Gk1H3p8VAVJm8kA9ZyVJ0DFR3jmoPCUox81x94rFYQx3WonYMffIR91IRcPxHKUB522DGT3xIBsqbehCceEAAh+QQACgD/ACwAAAAAMAAwAAAI/wBzCBxIsKDBgwgTKlxI8BIVSZcYSpxIkNMjBQo4UNxYkNNBRxgfHdzkkeNBLB3qlBzIqRFGRwY5OVpEyWRBS4kcPJjU0aUCmAXxIDCggKdNgVkQOXDgSFNFn0AHdkFjgKilowOhLHUgpaBPkQTrVDUwB+vATIuWrsHE8itBLAyqOmBrViCVpYfqEITK8lHVH13rCtz0aCmiqzlahhy4olBVRU45YqFbsBKapZA8KlYAdtOaqoRWHKwkaWVBLG7c4IlMcI6DQw8kCQSxaI0IgSV+VI06EBOHHz9EHwShqDikSaYvKYIdSSAnkiU76GaAheAmKIYECAigyLRzKGuKK/9aMwfLyhKOkCPcJOWBXueS0AgKEECAIEbenU+CFL44IyiZOLcJQ5oMmAMWjAxCn3YMSGEgQprg0Yh4azQyRX4KceIBIdvVR4gHAUqECRSMiNcBhgl1IUSHgzBSHUeWeLAGTSZFIoggaKyAIkObSCLFjgkRJgJrghVpJEeaJaakaV1EIgIUUD4JhQgiUIFVS4dspaUDaCBWSSNugNnImGG6AQKQCnWBgA5stulmczl8KWaYYjZy5lFquqmnDnA2KSWUU05p5VFY4rVllxkeyUlJSaJ5ZF2cWEKJowcVaBYmUngwRxYmbXLJJZk8SJEmVMzBQQcclEApQZlk4eolXVD/tMkkdXRgqwd11MSRJp++egmRCGURiQeocjCHJLEmtqpzXVziahagiloQFR5wcKoHUkQ0EBZUUFbpZBVh8iy0yRqEx6kdQIHYQJpIIUIk6yopECaUTFKJtJuI62q5BWECAgiTAJsDJYBymkMWK6xgcBf1UqJtRbxesiOoB2XipAilCUQJHnjoeuAk9krr3LIsSUJlJCHGybHHmtQ7yYtFXjKlCB6r3HFDIFPCL1ab4EGlFERujEcl1lUCcrxYWRIo0pWs3C/Ik3hrUxclUHlhZU5XhEW995qVSdWRPDyQ0EQX1AXIlQjMUSYrGFUQ2Qc5KzKho3Fc9qMTNY0H0ngrCrRJJqH2LXhCAQEAIfkEAAoA/wAsAAAAADAAMAAACP8AcwgcSLCgwYMIEypcSFBVlTyqGEqcSJBTBwdmPFDcWJDTwVIOHHQ4yMkjx4Op6pwySXBDyFIGvZTS8OJkQRikFFXY0xGkA5gFpxj6ZIaPzYGXcioqxaqiS5EFVyn6ZCgUjKMDTShSNGpKQZ9AB5r6RLYO1oGrNGx1FFEgJ58jB6ZyQFYRjbMDq4zaGokgSDMdTFokC8orXoFePGy1cDUHp6dxc7BoQPZNU46p2hZ8YWHrBy8C4SK2QLYBT4MvWLAsmGpDqRSXB3IytXcUC4GR3rzpm8OEoaEaC9L4QPb2wVO633jYs1rVG50m3HopKbAOqE+hUhFkhcqBge8VVrv/NeEouSNTqVie6MBHvOwqFXg7zqPowHcDCRy5d8znQ/I3GqByl2OgLTSdQKloUMh9BoRyQoEIsVJFB/+Vksd+CXFShyEMGlLHKhPRYIIGydWBIUKriHJfAhpoh5kpjtB0EioHHKCIakd5sceFJ7HSASoQHibkkBx5ZKRjSKJ1gglLMumkCcbZ5MUGolRppZWKNAZDBx2UUkqXXX4ZyYkLsQJKAGimKQCaAqAi0JZfesllmPKdtIoha66ZJptu5rDKFCYw2WSgJ+SB1WNXJpqlQmRuZOSjbhEpqUGcpFJTj2/UEdtJNFRxyimaUWTKF1+YkUKjBrGyRySmtJoCR6t8/wLArAGMcilDXrxgwimtnmLCrRPJ5Mmss3pSyoAIcXLJFLzyGgkLsaFK0AuK8EAsAIVEEiRBe/DaaxXI5pAKC+HGpEq0KTTwBbFfKLKtQFX0ekJ626VwwhQupnpJKpesxkodBxAbyn40oIIKH+++cMK9bV3ywgttsZLKxCAWdIkGnXRSRUI0VCycvSeclgMMeeSRryoTX/JuDnucehILC6fg8bgsNJaDF/umUu5ZqgB6gs0js1AzQaukvPJJXuSxcBWbwsCCyRXtC4Mq0i6UysInXHKT0PkKVPTEm9rEir1Qiud0HkALhDK/VaNYhQlT7Oz00AVJzO/RFK3CR9pvPhndNVo0tG0TyXRPKhHNfxue4Sqr4K244QEBACH5BAAKAP8ALAAAAAAwADAAAAj/AHMIHEiwoMGDCBMqXEhwBgsWNBhKnFjwiRo1pihqLMjpIK2LdA7m6rjxoJYRJkgS/KgmZMFctGZhKVkwy4Y3jnBxZOmS4IpYh2TppClwxs03dDQV/Eihp8BVRxw4UKOF6MAUb7KuIMiJliw1TwqikuqgltWBmjxknRVRYFeQBLXIknpk1dmBlBxlNbHyYtiBtKTGUnF3ICdTR45oyAL4a08XaKRuyFVyRtuaGrI+6fgWrMBcGqRGGFoQF6WEM2jRWUFZbFZHp3OYWLKEb44UQB04FUiDjlQXCG3RnjUCl8ocNJbgJJyDk/OBtWI5oFB1YC4TsgwpULABYQoPS2aF/0dVXaCKJzMRcmLhyJZhFm20bzfk4bhhLLXEi6eVwm5z+yKRlMUSQmyngCEUqAAgQblQ8oR44dFByYIJcTKCAwYqgEYtSkm0Sgq0hDcLKhQilMsi8h3iQXkUzWDCLB4wtpEKZRjyBnBEcWJaiRWacktrhQUpZEmcNefWcwJpsoIKS6rApJMqkEbkLItUaWUbbSxyhIwnmWLKCF6G6aNVmjgAy5kFoHkmLO7l0KWXYIp5C5lmrmnnmW0qCeWTT+JIEydUWiloG1sOuRCSziFp6KKGzSDjRppoMAKQJa1CyS23XEYRKoIIgoaCkGKRgi2ksgCpEAGkWsARUirESRYqkP9KqgosSgQTAq+kGkACHmhqECcOyXpLClgAyeNTrWHRRgG6viKECZQShMUtwlLiH2+4XGtQLiMksIRhKqAhiK6CtLGgC6TessIMxzXIAiUzIPRGKwD44GcOmoxgSK4ByLLgKk5mAaAWD7Hg3yozzODfE/QCoIZ9Rh1wwFYIrdJhQZaysEJ6yGWRRVuaHAIAAGCkcJALzG2ExUOUXEyDx5elAMbIQlx81yoas8Diyx8bpsbIrfx1FycurMCCC5TyrCkuPoyMQK00zWA0RAU52jNBS4wMgCN35eKCxsYVpHTVQIzcQ2xEaULJQ9ryBrNBtbgCwCsmn5VLFlB3fDWDFAwUxihBY297bGGB/31oLiMZrnhBAQEAIfkEAAoA/wAsAAAAADAAMAAACP8AcwgcSLCgwYMIEypcSDCTCxeZGEqcWPDOmzd3KGosyOmgnQtv7Bzk1HHjQVW2qJQk+PGCyII3RPxKZbKgql9MmtAsaOeiCIMs2Ci64KfmwEw4mdy5UVDExZcDWUFSNFSV0YEsmGhlQZDTxzc/CdqiusbW1ah2tIqowfIpQVVvqEJidXbgiyZaqbAEKaIkJxFU2QCrO5CTCa1OLg38CvWFBapOVlLMxNbgJSdaTXT06jYHpyZULbw4mMpFwkwlSrhgWpCK1iajc1D59UtvDhVrqEIdWEOEBAlFDwITIcKOrVSSe+cMVnilCaG+rA68QYUNrwa8miBkYYd4cRURBwb/K7FzZDAmtgW60PCA1/UHvyQTvISiO/E7LOh6ln+QdY7LETSA3QNvsMBfVy+Y4J0dJvhxYEKclCCBe+4pYoJ+DLESzB3epTfRDb5gx0sEv0inUSYq2HGHYhux0B4TsdXESSoxahShCv4RpuOOJpHk2Y+S3eBCMEMGY2SR5dUUAkhv+HKRk29owGImKJhggi1YYnklMA8ydAMbCoQp5gJhLmAbSlnacqWatgxm1JdixlmmbUIaeeSdSW70ly++aNCnn3wywSKPhBZaVyYmanQDEyVgaBIrfgTDQmUamaCLLooYuNENqUjKAjDBUVRDLwaUmoAGeUKoigufAsMCRJuG/7BLqaXuEkJ4CdXwAgutBnNJlwfVwJofGiRAqwEPoJAjQanw6ioLqTjKiirLEnTDHbtoJxAnwCiiC60I+HJgs66+UINknFySSrQC3cDKuQJpMEAACdR4gwkN0GrBgaw8pAp/mazLLidvXHqBQHbMK4AFBqniRJhcIcRKtTncoG4q4XHCCwAA8CIQK70EEIAYKhy0K7AIBZzKrwNt3HFJKoghci+OnsXKupdQqjHHHg9kgQABDLDbWar4sfJKO3dMkB8JiLxAokbVILCjSfc8UBNAB8BEXemm4gfUVUuWSQMi68LcVRavvGzYBZVAgAC6lHwWJ5Qd5LLV01kggZuGehZ2d38oE9YLxxH0LdELdthRo+GM5xAQACH5BAAKAP8ALAAAAAAwADAAAAj/AHMIHEiwoMGDCBMqXEiQGAwYxBhKnFgQhTBhKChqLFjsoIklwkwc7LgRYSZgVw7iuSiSowk7l0oWzFRCBEyDJlga5JMBg5IsMgcSMyFCBAqSA3OGLGjjiRufM4IO5GPHJq6CSvEUlISh6zCpA3OhKGrCBsGcS1oKzLSkqxyzYAVeqiqCEkE8ILUmdeMmg924AotJKloi08CVS/TmyKKk6xOkFInBnRmpqCSSaFsWE9E1CVCDl2AkJCZpWBbIAq8UtfP5SqRIKXNQyvBUrVATfD/vxMMb2AzINohGuhoYqaSeSwwPFJxEkfPHB2Gg4I0HBaWIA2FIioqwGIwnkgji/5JTxLmiIpESZroynfcwXLmWM0Q6t4L5IksooeZ4SRJ1FJLEtBEKbtyHwTCTLZQLDMO0d8V+ChUjjHmM2KGcRsRQggIKF1JESQUVOKGbTJmMSFExeAADIWAstjgRSTBCVkwWD2VBIww3cidTMZEoscQSPgL5oxzcEXPFkUgmSdyOGTgwhANQRvkkMAIZmeSVS5ZUDAZRSjnEEKFQmcOMONqIY406yhQJSBe1CRKRLkq0Ypx0DmRDgic+YUJ8QeWSySWX8KmRJAww4IZ+GxVDzCU2ZpGmRLm4ocCkQixhYkLF2DBDo47iOV8koUw6aSgiYJdQLps2egkxJOXiqUE28P95iRxDiBqEIigIWtCiqmYCmTCFiKArQcWYEMoTBFGCQRC2LgFhiTbOMCwuPejQihsCuWoDScL8YAADI4olgahJdDfDJZ4Wo4gO1iKbgxJBBKGEQCV4a0ASqBEjApRZcgQhCjywOwRcRAQQABHZKmKAAQmIWVAWf2lkgxDsBvBVDrkUfDBJVySwsCLDSvVEK+wWAaPGRCCVxMI/lMDiJT+w60OWKBOUBQMLO/CoTBmwq8MSxBb8CsIEPbGwAU7ERckr7BbSYQ4oQ0YMEQsr0O9GwzDdSnpBG0z0WQgYoEBsUkkSiiKeRl1QLhkwQjZYxYRcDBGvHDzSnC0qUrcieNcLmV0JJYjm9+AGBQQAIfkEAAoA/wAsAAAAADAAMAAACP8AcwgcSLCgwYMIEypcSBCQlmWAGEqcWHAFFBErKGqUKEmECEkHA21MCEhZn4OSLoI0mOzElpEFa7RE9rJgx48Gl8lZcqwmzByAJJ04sUIkwZsrB3qpxYTnn58Dlw09scymx4wEW8hhwuQK1IGBVpyQIsnLUY9Jc9R4whWK2a8C/yAbenIgUoLJuMqpCzdHoBZDkdUYuALtQC20mpYwqhHQ24KAWp5oYfQm1kBSuNLScnBLVYQllW1hPLDP1JrKkCFTJrDPTibJDEbesIHzwWVXcisbTNCLUGSfDV5J/IS3wL9yMCiHglBL7ucQCTp/mlBLiRYEl4lAohwDEimkCdb/gPH8SotljyUy/iMliRs3ymkpC2/wj7Lyyv7QXyhpSXcMS5Q1USBatLBCbjBsFMgTGMCXhBTUNYZbC8ZR1AcSSIgQHEw1RLiRJFfs19eIJKoH1nGkBfLHiiy2WOFIJdAioxwy1vhETV4so+OOPPo0UiBLKCLkkERil4MXD/HYI1RAEulkEUaq2OKUL2oUyAm0HHNMllweI4KHJYYp5k+AMBiRgrUkk56VyRjzxRcijHTFA7wkwdpGfRQBBgB8klGlQl4kwcugEBxjG0N/LOEDn3x6ssSaC12pCC9mUCpBCX8qVQsZjAIAhiJ1eZFpb0ZtcQwElFbqhiT7eaHIF4x+/2EMMozJYUwJkB4nCRvMlbYEnYM+cAx9gTzAKAJPnNnaGAF0ksRxgABilAigKPDAhr4ZQSkvTOwnSSedIOGjX0YIEIAnzAXCxKBMCITMAgoosER4NZQggQQJIpSMkTYVEEAAEJxphAEGsCGQFxjEawxWBS3DF0WAQPBvAQwPbIARRiljRrxG5AoTFJ0IIIAbRgVisREEyRHvAieMuMUCIo+Rr0AnSwdBvBGACdMS/wogR0E1E1RLvAo8AZcyB/xrjIcmE4yxeGzEy8vMMElygACelFBQ0xeHJ0m1vPD70woSdGxQ0AQFIoedIwaSKxsEG2xQICKWiEEBBmAw5kRSSQex4d6ADxQQACH5BAAKAP8ALAAAAAAwADAAAAj/AHMIHEiwoMGDCBMqXEhwE5ctmxhKnFgQFx48lShqlEjpYkaDxTYm3JQly8FKFymBpGSFi8iCmihdoVTDYEc8KgtqseMMlcuXAjdVunIFV0iCNz8OLIbCWc+aQAVyIXrl58CkBf04taM0ajFcRCtFHIgSJ8Eaz5ziGRtVYA2ZV7Qg9Yh0q8m2BLMQpaSJLF2pkZwOO6qxGGGCMYn6ufq32DCnkawS5CIXYTEtWvoa1LL3p94ri3Nk4eksZ0MrIEBsQcilZJYtmpcOpbRa4GFcgZ/FzvHVTocOHPAgrKHFdRYubHNwwQUV4ZZhuAhuQdWMA/Bmw0ZuMa6lxmGGhGtA/5vDwXqHSFm+G9S03XV3kZSe/Lb+hFJyhcWIu65NsRgq83MM0xxFDmF2n0RZNNPMM/y9tMluGhWlHl4UWmYbb7xN+NKEhOGCBi8ghhhiIwdS9BhPKDpjhx2RCRSJDjDGKCMzAxYGQiMX4Ihjjjl+ZIeMQOpAI1DFgMCjjhfk2MhHHooo4iGNaCgRNE5tpSJkkhmGYYYVdumlSJrYkUSJCxWDBzRkTomGIIJEAt8iozQT3UZ+XDBIAHgKUWOZzUzgZxt2NKgQF80QIgCeAhAyR5oHOdbIKH5O0AgeezaECigCHCrAIG2E9iBDmxzFhR1tRDqKEldweIEgmQYgyAPQEP/2xAPPkFnMFY6gQpAfcywyAaSjONPoBIgaYsdufoACywEd2BbqUZE8wMsEldl2hRKQTgDChFYccAAHguaQBCyDHKBrDs4sssgTAkHzwCGHzPFdDXjkeNdB0HQ1kBWEwALLBGM5ooACUfLGAS+HoKGvQFuEppEmE/hbyBUDCUzwQLhEAOKYXaLCjL9JEJbEwI0Q9ESI2VG4BS/+gnJvDhYXzPAEh/CyiGRAzeEvLOwSNPLFBOGBMC924IWLAv4+gLPFjhymSSMgRvCySFYgfYBwBcX83RXSprHwRlcswnHWJIMEQgcOt6WlQTE3+iVCHAwc8tsTaTHMMNXSrbdBAQEAIfkEAAoA/wAsAAAAADAAMAAACP8AcwgcSLCgwYMIEypcSPDGqlWcGEqcWDDLlStZKGqUaPEKlo0bOWXKdBDLFSsfDWJRZgNkwRtasmi5ofJkSoKZUOBRscrlQE4xs5AsaNJjQU5X8OBJ0dKnQBtZovYkWPSmQC1KUWR0KpDTlqhaIg6s2lCFUis0uT6NmmWqQLJjleLZohYn2LQ54OawkUIKnmBiNaYIdhBoVLpvL95UpjSFW4Krhh5U0amTBi0GV7FNu8WSJcRbdOKxZPCGshIlHv8MBaC1rhBNu37VonpgFp0q8ObglAUPFCjOrBy8oehLawBfGqQIbGOLboOZrmAemEkFcGfOoBAeXqvQcQA8FJH/psj8Si3s2FGEVZiplI/vPko9Z2hJCvYQUKRYCrzQkqIAxyVQm0KcqIBeLVfERlEKDXzxhTMgbVELFCpIBpINIbyhIEWWbKUWf3UlxMmIu0VEYogLYaGIKKKsyOKLkICo0RVS1FgjHjbiMZUUAfTo44+gDDhRLaUU2UGRpRzZQUol/OhkAKBsSF4tRxqJZAdLvuUiixO8KAok802ElI1k3uiWiSWSKCOKbLaJ0A0ldBDmQgUC5pQViugSjRQgWaJBBiF4SBEWGiRgQDTRTCMlgRm+8YYGUljIXghBGHBoNEGEMGdCVpTiqKMdqLDoQDfgMQ2iiCaQwU2bkipWJlJo//DpG07YaRAnGegZjQG6KGJFYLVQo8KauwXTAR4EZRFCBqQ4moEUMnLCCKoNlKAbFtOAkmlXuw2EBzWKvDFdV8E0IesbUCCkDBmFOCFpDk2wGwSfOUDxBinp5mAFuIo4AyJfkEAyrkFWKHNQMA2QAQopaXUgjTQx5nCDE4oowojBBn0F0g1vFFJIA1cMVIoZ0pQyFiMVN9GqRiiA4nETgZUijRkmDwRFxWsIV1cmiigciqAdkByxQJlkULEGQmrkjMug5Cvyw0MLlMIaFdPrVBbSeKyIpA6bAUlBNpRSMSmCgqRMKIWAgoJBI5dsUDBrUMOIVS4po0EpMsoMMYicQB7hRNk+nVhQ11/f6uZBTZDcweETbWGFFQMzLvlAAQEAIfkEAAoA/wAsAAAAADAAMAAACP8AcwgcSLCgwYMIEypcSLDYjRvFGEqcWPBPqlR/KGpseOOgRYwbN6oINaFjxYsZDWpJZTLkwGQEALiqZfBjSoJd9kyqBMjlwD2CAAAAclPgR0wGYUyatKelTyRCAXA4CZIgJp2TkPocqAWBUB8wCNpsWGmppYhbBz5pJZQC2hxjuS7d0yUtQUDVhAZINjBujhtYw4bMU+lgMh5Ch/SEi3JgqqWTFhe8URfhpB8/OGgdWIyC0FZPBHbBhKnyH8ipDBZLlUyF5IYTAgR4tcDO60oxWzVCiKlsJadw89gaXlh1GwKyAxCAoOItByC2EwKCUbRLpVvDbd2yhPCGiWqvkg//ciOYssYbMJJlv5V1IaZmhMLPJvTh7UQtKtarSGVfIQw3g4T3SjWVTVTMHtklYwlwDBWjAgQECELTRn/ccgtdWwFihwYMSpQKJv25FKJdCkX01ogkGpSKG9RQ04aLL7Y4S4cTWaLCjTjimMdithjg44+D/CjNaxvdIsKRSCJphxYC9fjjkz6GQiRFxSST5JVLCpRKIy3G2KKMNEpkY4457thQDvahmOKabCp0g5FhJnTgWVtV0sgCDKgQkhbNNGPCZhTxWc0nhLYRp2qozMLBLB8kU+BCgNQCAaGESmOHmgjtccwsis7yRFMlqkDBApRWw0FqaGIq0FtdJPNBp7PU/8LfQcU0wwClC7QxCUEmILFrQjA8oedAmJjQzKIcNMOXahpQGoEtr2lBgTShTGjiQCog0QgHRRVjiQiccnALQpVIM8QTRQl0zBDSSDNuDrZwwIEJAu2hbSP0TpbHMccAWtAe3BlkSQTscqguBRN8sKoIjbihAaoVMbnRDRu0C0FxORwzQcJopaKBG26IcChFI7GrsFoTUHCyQCY00ggSe6TYhRvsyiKxuhsfI9YsbjTSzJQh1WKuNKgUdAzCKwukgsuNLLuVFhOY68ajGW+c9F8f9KxZWpbIMkQowxKkMccFWYKEGxvc7BMMsxwT4thXo2lCliQWM6LGKtPaJkIipA8c2t4T/bHHHv4CbjhBAQEAOw==);
-    }
-
-    .twitter-share-button {
-        margin-left: 20px;
-    }
-
-    </style>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="jquery.unveil.js"></script>
-
-    <script>
-    $(function() {
-        $("li img").unveil(300);
-    });
-    </script>
-
-    <body>
+  <body>
 
     <header>
-        <h1>Unveil<small>.js</small></h1>
-        <p>A very lightweight plugin to lazy load images for jQuery or Zepto.js</p>
+      <h1>Unveil<small>.js</small></h1>
+      <p>A very lightweight plugin to lazy load images for jQuery or Zepto.js</p>
 
-        <iframe src="http://ghbtns.com/github-btn.html?user=luis-almeida&repo=unveil&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="55" height="20"></iframe>
-        <iframe src="http://ghbtns.com/github-btn.html?user=luis-almeida&repo=unveil&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="55" height="20"></iframe>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="unveil.js - A very lightweight plugin to lazy load images" data-via="lmgalmeida" data-related="lmgalmeida" data-count="none">Tweet</a>
+      <iframe src="http://ghbtns.com/github-btn.html?user=luis-almeida&repo=unveil&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="55" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=luis-almeida&repo=unveil&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="55" height="20"></iframe>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-text="unveil.js - A very lightweight plugin to lazy load images" data-via="lmgalmeida" data-related="lmgalmeida" data-count="none">Tweet</a>
     </header>
 
     <p>Most of us are familiar with the <a target="_blank" href="http://www.appelsiini.net/projects/lazyload">Lazy Load</a> plugin by <a target="_blank" href="http://www.appelsiini.net/">Mika Tuupola</a>.
-    <p>This plugin is very useful and it boosts performance delaying loading of images in long web pages because images outside of viewport (visible part of web page) won't be loaded until the user scrolls to them.</p>
+    <p>This plugin is very useful and it boosts performance delaying loading of images in long web pages because images outside of the viewport (visible part of web page) won't be loaded until the user scrolls to them.</p>
     <p>Lazy Load has some cool options such as custom effects, container, events or data attribute. If you're not gonna use any of them you can reduce the file size by leaving just the essential code to show the images.</p>
     <p>That's what I did and this is my lightweight version of Lazy Load with support for serving high-resolution images to devices with retina displays - <strong>less than 1k</strong>.</p>
+    <p><i>As of version 2, a few more options have been added allowing more advanced functionality.</i></p>
 
-    <h2>Usage</h2>
+    <h2 id="usage">Usage</h2>
     <p>Use a placeholder image in the src attribute - something to be displayed while the original image loads - and include the actual image source in a "data-src" attribute.</p>
     <p>If you want to serve high-resolution images to devices with retina displays, you just have to include the source for those images in a "data-src-retina" attribute.</p>
     <p>You don't need to include a "data-src-retina" attribute in all the image tags, unveil is smart enough to fallback to "data-src" or even do nothing in case there isn't any "data-src" specified.</p>
-    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img1.jpg"</span> /></code>
-    <br>
-    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img2.jpg"</span> <span class="blue">data-src-retina=</span><span class="red">"img2-retina.jpg"</span> /></code>
-    <br>
+    <pre><code>
+    &lt;img src="bg.png" data-src="img1.jpg" /&gt;
+    &lt;img src="bg.png" data-src="img2.jpg" data-src-retina="img2-retina.jpg" /&gt;
+    </code></pre>
     <p>If you care about users without javascript enabled, you can include the original image inside a &lt;noscript&gt; tag:</p>
-    <code>&lt;noscript&gt;<br>&nbsp;&nbsp;&lt;img <span class="blue">src=</span><span class="red">"img1.jpg"</span> /><br>&lt;/noscript&gt;</code>
-    <br><br>
+    <pre><code>
+    &lt;noscript&gt;&lt;img src="img1.jpg" /&gt;&lt;/noscript&gt;
+    </code></pre>
     <p>Run the script on document ready:</p>
-    <code>$(<span class="blue">document</span>).ready(<span class="blue">function</span>() {<br>
-    &nbsp;&nbsp;$(<span class="red">"img"</span>).unveil();<br>
-    });</code>
+    <pre><code>
+    $(document).ready(function() {
+      $("img").unveil();
+    });
+    </code></pre>
 
-    <h2>Threshold</h2>
-    <p>By default, images are only loaded and "unveiled" when the user scrolls to them and they became visible on the screen.</p>
-    <p>If you want your images to load earlier than that, lets say 200px before they appear on the screen, you just have to:</p>
-    <code>$(<span class="red">"img"</span>).unveil(<span class="purple">200</span>);</code>
-
-    <h2>Callback</h2>
-    <p>As a second parameter you can also specify a callback function that will fire after an image has been "unveiled".</p>
-    <p>Inside the callback function <code>this</code> refers to the image's DOM node, so with the help of CSS3 (or jQuery animations) and by attaching a simple load event you can easily add some fancy entrance animation to your images:</p>
-    <code><span class="blue">img</span> {<br>
-    &nbsp;&nbsp;opacity: 0;<br>
-    &nbsp;&nbsp;transition: opacity .3s ease-in;<br>
-    }</code>
-    <br><br>
-    <code>$(<span class="red">"img"</span>).unveil(<span class="purple">200</span>, <span class="blue">function</span>() {<br>
-    &nbsp;&nbsp;$(this).load(<span class="blue">function</span>() {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;this.style.opacity = 1;<br>
-    &nbsp;&nbsp;});<br>
-    });</code>
-
-    <h2>Trigger</h2>
-    <p>You can still trigger image loading whenever you need.</p>
-    <p>All you have to do is select the images you want to "unveil" and trigger the event:</p>
-    <code>$(<span class="red">"img"</span>).trigger(<span class="red">"unveil"</span>);</code>
-
-    <h2>Lookup</h2>
-    <p>It is also possible to lookup for images in the viewport that haven't been "unveiled" yet.</p>
-    <p>This can be useful, for instance, in case of a tabbed layout.</p>
-    <code>$(<span class="blue">window</span>).trigger(<span class="red">"lookup"</span>);</code>
-
-    <h2>Cancel</h2>
-    <p>You can remove all the "unveil" event handlers from "window":</p>
-    <code>$(<span class="blue">window</span>).off(<span class="red">"unveil"</span>);</code>
-
-    <h2>Demo</h2>
+    <h2 id="demo">Demo</h2>
     <p>If you're on a "normal" display, unveil will load the low resolution version (800x500). In case you're on a device with a retina display, the high resolution version (1280x800 in this case) will be loaded instead.</p>
-    <p>Scroll down to see it working - placeholder images from <a href="http://lorempixel.com/">lorempixel</a>.</p>
+    <p>Scroll down to see it working - <i>images from <a href="http://lorempixel.com/">lorempixel</a></i>.</p>
 
     <ul>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/1" data-src-retina="http://lorempixel.com/g/1280/800/city/1" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/2" data-src-retina="http://lorempixel.com/g/1280/800/city/2" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/3" data-src-retina="http://lorempixel.com/g/1280/800/city/3" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/4" data-src-retina="http://lorempixel.com/g/1280/800/city/4" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/5" data-src-retina="http://lorempixel.com/g/1280/800/city/5" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/6" data-src-retina="http://lorempixel.com/g/1280/800/city/6" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/7" data-src-retina="http://lorempixel.com/g/1280/800/city/7" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/8" data-src-retina="http://lorempixel.com/g/1280/800/city/8" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/9" data-src-retina="http://lorempixel.com/g/1280/800/city/9" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
-        <li><img data-src="http://lorempixel.com/g/800/500/city/10" data-src-retina="http://lorempixel.com/g/1280/800/city/10" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/1" data-src-retina="http://lorempixel.com/g/1280/800/city/1" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/2" data-src-retina="http://lorempixel.com/g/1280/800/city/2" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/3" data-src-retina="http://lorempixel.com/g/1280/800/city/3" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/4" data-src-retina="http://lorempixel.com/g/1280/800/city/4" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/5" data-src-retina="http://lorempixel.com/g/1280/800/city/5" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/6" data-src-retina="http://lorempixel.com/g/1280/800/city/6" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/7" data-src-retina="http://lorempixel.com/g/1280/800/city/7" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/8" data-src-retina="http://lorempixel.com/g/1280/800/city/8" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/9" data-src-retina="http://lorempixel.com/g/1280/800/city/9" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src="http://lorempixel.com/g/800/500/city/10" data-src-retina="http://lorempixel.com/g/1280/800/city/10" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
     </ul>
 
-    <h2>Browser support</h2>
+    <h2 id="options">Options</h2>
+
+    <h3 id="threshold">Threshold</h3>
+    <p>By default, images are only loaded and "unveiled" when the user scrolls to them and they became visible on the screen.</p>
+    <p>If you want your images to load earlier than that, lets say 200px before they appear on the screen, you just have to:</p>
+    <pre><code>
+    $("img").unveil({ threshold: 200 });
+    </code></pre>
+
+    <h3 id="debounce">Debounce</h3>
+    <p>While the user is scrolling or resizing the window, Unveil is continuously working on the background, recalculating the new position of each image on the page in order to find out if it has become visible in the viewport. This can become very expensive for the browser since these events are fired frequently.</p>
+    <p>We can have a huge performance boost if we wait before doing all of this computation until after a threshold of time, e.g. 100ms:</p>
+    <pre><code>
+    $("img").unveil({ debounce: 100 });
+    </code></pre>
+
+    <h3 id="container">Container</h3>
+    <p>If the images you want to "unveil" are inside a container with a vertical scrollbar, you just have to pass your container as a jQuery object:</p>
+    <pre><code>
+    $("img").unveil({ container: $("ul") });
+    </code></pre>
+
+    <h3 id="custom">Custom</h3>
+    <p>Lets say you think Unveil doesn't do enough for you. You have a crazy (or not so crazy) use case and you need to control how your images are unveiled. If you're in this position, you can tell the plugin not to "unveil" the images automatically. That basically means you want to do the heavy lifting yourself.</p>
+    <pre><code>
+    $("img").unveil({ custom: true });
+    </code></pre>
+    <p>This option combined with the <a href="#on:unveil">unveil</a> event can be <a href="demo/screen_size.html">extremely helpful</a>.</p>
+
+    <h2>Events: <code>trigger</code></h2>
+
+    <h3 id="trigger:unveil">Unveil</h3>
+    <p>You can still trigger image loading whenever you need.</p>
+    <p>All you have to do is select the images you want to "unveil" and trigger the event:</p>
+    <pre><code>
+    $("img").trigger("unveil");
+    </code></pre>
+
+    <h3 id="trigger:lookup">Lookup</h3>
+    <p>It is also possible to lookup for images in the viewport that haven't been "unveiled" yet.</p>
+    <p>This can be useful, for instance, in case of a tabbed layout.</p>
+    <pre><code>
+    $(window).trigger("lookup");
+    </code></pre>
+
+    <h2>Events: <code>on</code></h2>
+
+    <h3 id="on:unveil">Unveil</h3>
+    <p>When an image becomes visible within the viewport and before it's "unveiled", an "unveil" event is fired:</p>
+    <pre><code>
+    $("img")
+      // register the event listener before initializing unveil
+      .on("unveil", function() {
+        // "this" refers to the image's DOM node
+      })
+      .unveil();
+    </code></pre>
+
+    <p>You can use this event to do more advanced stuff like adding some fancy <a href="demo/entrance_animations.html" target="_blank">entrance animations</a> to your images or <a href="demo/screen_size.html" target="_blank">serving images by screen size</a> with the help of the <a href="#custom">custom</a> option.</p>
+
+    <h3 id="on:unveiled">Unveiled</h3>
+    <p>When an image is "unveiled", an event with that same name is fired.</p>
+    <p>You can listen to this event if you need "to do things" after an image has been unveiled.</p>
+
+    <pre><code>
+    $("img")
+      // register the event listener before initializing unveil
+      .on("unveiled", function() {
+        // "this" refers to the image's DOM node
+      })
+      .unveil();
+    </code></pre>
+
+    <h2 id="off:unveil">Events: <code>off</code></h2>
+    <p>You can remove all the "unveil" event handlers at any time:</p>
+    <pre><code>
+    // Without custom container
+    $(window).off("unveil");
+
+    // With custom container:
+    // $("img").unveil({ container: $("ul") });
+    $("ul").off("unveil");
+    </code></pre>
+
+    <h2 id="browser_support">Browser support</h2>
     <p>Compatible with All Browsers and IE7+.</p>
 
-    <h2>Download</h2>
+    <h2 id="download">Download</h2>
     <p>Download the script from the project page on <a href="https://github.com/luis-almeida/unveil">GitHub</a>.</p>
     <p>If you have any suggestion or bug to report please use github issues or get it touch with me on twitter - <a href="https://twitter.com/lmgalmeida">@lmgalmeida</a>.</p>
 
-    <h2>License</h2>
+    <h2 id="license">License</h2>
     <p>Unveil is licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
+
+    <script src="//yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="jquery.unveil.js"></script>
+    <script>
+    $(document).ready(function() {
+      $("img").unveil({ threshold: 100, debounce: 50 });
+    });
+    </script>
 
     <script>
     // Twitter
     !function(d,s,id){
-        var js,fjs=d.getElementsByTagName(s)[0];
-        if(!d.getElementById(id)){
-            js=d.createElement(s);
-            js.id=id;
-            js.src="//platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js,fjs);
-        }
+      var js,fjs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src="//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js,fjs);
+      }
     }(document,"script","twitter-wjs");
     // Analytics
     var _gaq=[['_setAccount','UA-30936310-1'],['_trackPageview']];
@@ -206,5 +188,5 @@
     s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
 
-    </body>
+  </body>
 </html>

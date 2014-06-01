@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Filtrify">
+    <meta name="keywords" content="javascript, jquery, lazy load, performance, plugin" />
+    <meta name="author" content="Luís Almeida">
+    <meta name="viewport" content="width=device-width">
+    <title>jQuery Unveil - Serving images by screen size</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/github.min.css">
+  </head>
+  <body>
+
+    <header>
+      <h1>Unveil<small>.js</small></h1>
+      <p>Serving images by screen size.</p>
+    </header>
+
+    <pre><code>
+    &lt;!-- HTML --&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;img
+          data-src-small="http://lorempixel.com/g/320/200/food/1"
+          data-src-medium="http://lorempixel.com/g/640/400/food/1"
+          data-src-large="http://lorempixel.com/g/1280/800/food/1"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;img
+          data-src-small="http://lorempixel.com/g/320/200/food/1"
+          data-src-medium="http://lorempixel.com/g/640/400/food/1"
+          data-src-large="http://lorempixel.com/g/1280/800/food/1"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /&gt;
+      &lt;/li&gt;
+      ...
+    &lt;/ul&gt;
+    </code></pre>
+
+    <pre><code>
+    // Javascript
+    $(document).ready(function() {
+
+      function customUnveiler() {
+        var $img = $(this), attr, src;
+
+        if (matchMedia("(max-width: 320px)").matches) {
+          // if your screen is less than 320px wide
+          attr = "data-src-small";
+        } else if (matchMedia("(max-width: 640px)").matches) {
+          // if it is less than 640px wide
+          attr = "data-src-medium";
+        } else {
+          // fallback to the large one
+          attr = "data-src-large";
+        }
+
+        $img.attr("src", $img.attr(attr));
+      }
+
+      $("li img")
+        .on("unveil", customUnveiler)
+        .unveil({ custom: true });
+
+    });
+    </code></pre>
+
+    <ul>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/1" data-src-medium="http://lorempixel.com/g/640/400/food/1" data-src-large="http://lorempixel.com/g/1280/800/food/1" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/2" data-src-medium="http://lorempixel.com/g/640/400/food/2" data-src-large="http://lorempixel.com/g/1280/800/food/2" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/3" data-src-medium="http://lorempixel.com/g/640/400/food/3" data-src-large="http://lorempixel.com/g/1280/800/food/3" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/4" data-src-medium="http://lorempixel.com/g/640/400/food/4" data-src-large="http://lorempixel.com/g/1280/800/food/4" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/5" data-src-medium="http://lorempixel.com/g/640/400/food/5" data-src-large="http://lorempixel.com/g/1280/800/food/5" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/6" data-src-medium="http://lorempixel.com/g/640/400/food/6" data-src-large="http://lorempixel.com/g/1280/800/food/6" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/7" data-src-medium="http://lorempixel.com/g/640/400/food/7" data-src-large="http://lorempixel.com/g/1280/800/food/7" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/8" data-src-medium="http://lorempixel.com/g/640/400/food/8" data-src-large="http://lorempixel.com/g/1280/800/food/8" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/9" data-src-medium="http://lorempixel.com/g/640/400/food/9" data-src-large="http://lorempixel.com/g/1280/800/food/9" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+      <li><img data-src-small="http://lorempixel.com/g/320/200/food/10" data-src-medium="http://lorempixel.com/g/640/400/food/10" data-src-large="http://lorempixel.com/g/1280/800/food/10" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
+    </ul>
+
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../jquery.unveil.js"></script>
+
+    <script>
+    $(document).ready(function() {
+
+      function customUnveiler() {
+        var $img = $(this), attr, src;
+
+        if (matchMedia("(max-width: 320px)").matches) {
+          attr = "data-src-small";
+        } else if (matchMedia("(max-width: 640px)").matches) {
+          attr = "data-src-medium";
+        } else {
+          attr = "data-src-large";
+        }
+
+        $img.attr("src", $img.attr(attr));
+      }
+
+      $("li img")
+        .on("unveil", customUnveiler)
+        .unveil({ custom: true });
+
+    });
+    </script>
+
+    <script>
+    // Twitter
+    !function(d,s,id){
+      var js,fjs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src="//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js,fjs);
+      }
+    }(document,"script","twitter-wjs");
+    // Analytics
+    var _gaq=[['_setAccount','UA-30936310-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+
+  </body>
+</html>
