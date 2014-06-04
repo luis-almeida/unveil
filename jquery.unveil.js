@@ -16,14 +16,20 @@
         th = threshold || 0,
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
+        bkg    = retina? "data-bkg-retina" : "data-bkg",
         images = this,
         loaded;
 
     this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
-      source = source || this.getAttribute("data-src");
+      var bkg_source = this.getAttribute(bkg);
+      var source     = bkg_source !== undefined ? bkg_source : this.getAttribute(attrib);
+      source         = source || this.getAttribute("data-src");
       if (source) {
-        this.setAttribute("src", source);
+        if (bkg_source !== undefined) {
+          this.style.backgroundImage = "url('" + source + "')";
+        } else {
+          this.setAttribute("src", source);
+        }
         if (typeof callback === "function") callback.call(this);
       }
     });
