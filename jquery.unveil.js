@@ -34,7 +34,7 @@
         var $e = $(this);
         if ($e.is(":hidden")) return;
 
-        var wt = trg.scrollTop(),
+        var wt = trg.offset().top;
             wb = wt + trg.height(),
             et = $e.offset().top,
             eb = et + $e.height();
