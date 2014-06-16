@@ -8,45 +8,42 @@
  * https://github.com/luis-almeida
  */
 
-;
-(function($) {
+;(function($) {
 
-    $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(threshold, callback) {
 
-        var $w = $(window),
-            th = threshold || 0,
-            retina = window.devicePixelRatio > 1,
-            attrib = retina ? "data-src-retina" : "data-src",
-            images = this,
-            loaded;
+    var $w = $(window),
+        th = threshold || 0,
+        retina = window.devicePixelRatio > 1,
+        attrib = retina? "data-src-retina" : "data-src",
+        images = this,
+        loaded;
 
-        this.one("unveil", function() {
-            var source = this.getAttribute(attrib);
-            source = source || this.getAttribute("data-src");
+    this.one("unveil", function() {
+      var source = this.getAttribute(attrib);
+      source = source || this.getAttribute("data-src");
             element = this;
-            if (source) {
+      if (source) {
                 loadImg(source, this);
-                // this.setAttribute("src", source);
-                // if (typeof callback === "function") callback.call(this);
-            }
-        });
+      }
+    });
 
-        function unveil() {
-            var inview = images.filter(function() {
-                var $e = $(this);
-                if ($e.is(":hidden")) return;
+    function unveil() {
+      var inview = images.filter(function() {
+        var $e = $(this);
+        if ($e.is(":hidden")) return;
 
-                var wt = $w.scrollTop(),
-                    wb = wt + $w.height(),
-                    et = $e.offset().top,
-                    eb = et + $e.height();
+        var wt = $w.scrollTop(),
+            wb = wt + $w.height(),
+            et = $e.offset().top,
+            eb = et + $e.height();
 
-                return eb >= wt - th && et <= wb + th;
-            });
+        return eb >= wt - th && et <= wb + th;
+      });
 
-            loaded = inview.trigger("unveil");
-            images = images.not(loaded);
-        }
+      loaded = inview.trigger("unveil");
+      images = images.not(loaded);
+    }
 
         function loadImg(source, el) {
             $.get(source, function() {
@@ -60,10 +57,10 @@
         $w.scroll(unveil);
         $w.resize(unveil);
 
-        unveil();
+    unveil();
 
-        return this;
+    return this;
 
-    };
+  };
 
 })(window.jQuery || window.Zepto);
