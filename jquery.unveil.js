@@ -19,26 +19,34 @@
         images = this,
         loaded;
 
-    this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
-      source = source || this.getAttribute("data-src");
-      if (source) {
-        this.setAttribute("src", source);
-        if (typeof callback === "function") callback.call(this);
+	  var isInView = function(e) {
+        if (e.is(":hidden")) return;
+
+        var wt = $w.scrollTop(),
+            wb = wt + $w.height(),
+            et = e.offset().top,
+            eb = et + e.height();
+
+        return eb >= wt - th && et <= wb + th;      
+    }
+
+    this.on("unveil", function(event) {
+      if (isInView($(this)))
+      {
+        var source = this.getAttribute(attrib);
+        source = source || this.getAttribute("data-src");
+        if (source) {
+          this.setAttribute("src", source);
+          if (typeof callback === "function") callback.call(this);
+        }
+		    $(this).off(event);
       }
     });
 
     function unveil() {
       var inview = images.filter(function() {
         var $e = $(this);
-        if ($e.is(":hidden")) return;
-
-        var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
-            eb = et + $e.height();
-
-        return eb >= wt - th && et <= wb + th;
+        return isInView($e);
       });
 
       loaded = inview.trigger("unveil");
