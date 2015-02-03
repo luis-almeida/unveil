@@ -1,7 +1,7 @@
 // package metadata file for Meteor.js
 'use strict';
 
-var packageName = 'luis-almeida:unveil'; // https://atmospherejs.com/mediatainment/switchery
+var packageName = 'luisalmeida:unveil'; // https://atmospherejs.com/mediatainment/switchery
 var where = 'client'; // where to install: 'client' or 'server'. For both, pass nothing.
 
 Package.describe({
