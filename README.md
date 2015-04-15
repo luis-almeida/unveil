@@ -8,6 +8,8 @@ This plugin is very useful and it boosts performance delaying loading of images 
 Lazy Load has some cool options such as custom effects, container, events or data attribute. If you're not gonna use any of them you can reduce the file size by leaving just the essential code to show the images.
 That's what I did and this is my lightweight version of Lazy Load with support for serving high-resolution images to devices with retina displays - less than 1k.
 
+### Documentation
+
 Visit unveil's [project page](http://luis-almeida.github.com/unveil/) to read the documentation and see the demo.
 
 
