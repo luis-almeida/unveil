@@ -93,6 +93,12 @@
     <script>
     $(function() {
         $("li img").unveil(300);
+
+        var unveilCount = 0;
+        $("li img").on('unveiled', function() {
+          unveilCount++;
+          $(".unveil-count").html(unveilCount);
+        });
     });
     </script>
 
@@ -161,6 +167,13 @@
     <p>You can remove all the "unveil" event handlers from "window":</p>
     <code>$(<span class="blue">window</span>).off(<span class="red">"unveil"</span>);</code>
 
+    <h2>Event</h2>
+    <p>You can also bind code to the <code>unveiled</code> event that will fire after an image has been "unveiled".</p>
+    <p>This event will trigger after the callback function (if any) has been executed:</p>
+    <code>$(<span class="red">"img"</span>).on(<span class="red">"unveiled"</span>, <span class="blue">function</span>() {<br>
+    &nbsp;&nbsp;alert(<span class="red">"Image unveiled"</span>);<br>
+    });</code>
+
     <h2>Demo</h2>
     <p>If you're on a "normal" display, unveil will load the low resolution version (800x500). In case you're on a device with a retina display, the high resolution version (1280x800 in this case) will be loaded instead.</p>
     <p>Scroll down to see it working - placeholder images from <a href="http://lorempixel.com/">lorempixel</a>.</p>
@@ -177,6 +190,8 @@
         <li><img data-src="http://lorempixel.com/g/800/500/city/9" data-src-retina="http://lorempixel.com/g/1280/800/city/9" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
         <li><img data-src="http://lorempixel.com/g/800/500/city/10" data-src-retina="http://lorempixel.com/g/1280/800/city/10" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></li>
     </ul>
+
+    <p>The "unveiled" event was triggered <span class="unveil-count">0</span> time(s).</p>
 
     <h2>Browser support</h2>
     <p>Compatible with All Browsers and IE7+.</p>
