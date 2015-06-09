@@ -17,7 +17,8 @@
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
         images = this,
-        loaded;
+        loaded,
+        timer;
 
     this.one("unveil", function() {
       var source = this.getAttribute(attrib);
@@ -29,20 +30,30 @@
     });
 
     function unveil() {
-      var inview = images.filter(function() {
-        var $e = $(this);
-        if ($e.is(":hidden")) return;
-
-        var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
-            eb = et + $e.height();
-
-        return eb >= wt - th && et <= wb + th;
-      });
-
-      loaded = inview.trigger("unveil");
-      images = images.not(loaded);
+      if (timer) {
+        window.clearTimeout(timer);
+      }
+      
+      timer = window.setTimeout(function() {
+        // there were no more images on the entire page
+        // no need to keep trying
+        if (images.length == 0) return;
+        
+        var inview = images.filter(function() {
+          var $e = $(this);
+          if ($e.is(":hidden")) return;
+  
+          var wt = $w.scrollTop(),
+              wb = wt + $w.height(),
+              et = $e.offset().top,
+              eb = et + $e.height();
+  
+          return eb >= wt - th && et <= wb + th;
+        });
+  
+        loaded = inview.trigger("unveil");
+        images = images.not(loaded);
+      }, 50);
     }
 
     $w.on("scroll.unveil resize.unveil lookup.unveil", unveil);
