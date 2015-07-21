@@ -14,13 +14,14 @@ Visit unveil's [project page](http://luis-almeida.github.com/unveil/) to read th
 ###Change the attribute Unveil targets by passing an object as the first parameter
 
 
-
+```javascript
 $("img").unveil({
   threshold: 10,
   attrib: 'data-unveil-src',
   retinaAttrib: 'data-unveil-retina-src',
   callback: function() {}
 });
+```
 
 
 ###Browser support
