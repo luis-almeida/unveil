@@ -11,6 +11,19 @@ That's what I did and this is my lightweight version of Lazy Load with support f
 Visit unveil's [project page](http://luis-almeida.github.com/unveil/) to read the documentation and see the demo.
 
 
+###Change the attribute Unveil targets by passing an object as the first parameter
+
+
+```javascript
+$("img").unveil({
+  threshold: 10,
+  attrib: 'data-unveil-src',
+  retinaAttrib: 'data-unveil-retina-src',
+  callback: function() {}
+});
+```
+
+
 ###Browser support
 Compatible with All Browsers and IE7+.
 
