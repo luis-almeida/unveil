@@ -20,25 +20,26 @@
         loaded;
 
     this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
-      source = source || this.getAttribute("data-src");
+      var source = (this.getAttribute(attrib) || this.getAttribute("data-src"));
       if (source) {
         this.setAttribute("src", source);
-        if (typeof callback === "function") callback.call(this);
+        if (typeof callback === "function") {
+          callback.call(this);
+        }
       }
     });
 
     function unveil() {
       var inview = images.filter(function() {
         var $e = $(this);
-        if ($e.is(":hidden")) return;
+        if (!$e.is(":hidden")){
+          var wt = $w.scrollTop(),
+              wb = wt + $w.height(),
+              et = $e.offset().top,
+              eb = et + $e.height();
 
-        var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
-            eb = et + $e.height();
-
-        return eb >= wt - th && et <= wb + th;
+          return eb >= wt - th && et <= wb + th;
+        }
       });
 
       loaded = inview.trigger("unveil");
