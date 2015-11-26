@@ -14,6 +14,10 @@ Visit unveil's [project page](http://luis-almeida.github.com/unveil/) to read th
 ###Browser support
 Compatible with All Browsers and IE7+.
 
+###Minimum Jquery version needed 
+V1.9.1 or above
+
+
 
 ###License
 Unveil is licensed under the [MIT license](http://opensource.org/licenses/MIT).
