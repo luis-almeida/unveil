@@ -29,13 +29,13 @@
     });
 
     function unveil() {
+      var wt = $w.scrollTop(),
+          wb = wt + $w.height();
       var inview = images.filter(function() {
         var $e = $(this);
         if ($e.is(":hidden")) return;
 
-        var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
+        var et = $e.offset().top,
             eb = et + $e.height();
 
         return eb >= wt - th && et <= wb + th;
