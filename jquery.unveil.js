@@ -10,14 +10,20 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(dom, threshold, callback) {
 
     var $w = $(window),
         th = threshold || 0,
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
         images = this,
-        loaded;
+        loaded,
+        $wOffset = 0;
+
+    if(typeof(dom) !== 'undefined' && $(dom).length > 0){
+        $w = $(dom);
+        $wOffset = $(dom).offset().top;
+    }
 
     this.one("unveil", function() {
       var source = this.getAttribute(attrib);
@@ -35,7 +41,7 @@
 
         var wt = $w.scrollTop(),
             wb = wt + $w.height(),
-            et = $e.offset().top,
+            et = $e.offset().top - $wOffset,
             eb = et + $e.height();
 
         return eb >= wt - th && et <= wb + th;
