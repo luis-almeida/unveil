@@ -36,7 +36,7 @@
         var wt = $w.scrollTop(),
             wb = wt + $w.height(),
             et = $e.offset().top,
-            eb = et + $e.height();
+            eb = et + $e.outerHeight(true); //Padding, border, margin are modifiable propertys which belongs to this element
 
         return eb >= wt - th && et <= wb + th;
       });
