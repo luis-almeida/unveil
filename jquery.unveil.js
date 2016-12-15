@@ -37,11 +37,11 @@
         var wt = $w.scrollTop(),
             wb = wt + $w.height(),
             et = $e.offset().top,
-           eb = et + $e.height(),
-					ww = $w.width(),
-					el = $e.offset().left;
+            eb = et + $e.height(),
+	    ww = $w.width(),
+	    el = $e.offset().left;
 
-				return eb >= wt - th && et <= wb + th && el <= ww;
+         return eb >= wt - th && et <= wb + th && el <= ww;
       });
 
       loaded = inview.trigger("unveil");
