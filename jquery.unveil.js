@@ -10,9 +10,10 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(threshold, callback, selectorsToWatch) {
 
     var $w = $(window),
+        $stw = selectorsToWatch ? $(selectorsToWatch) : $w,
         th = threshold || 0,
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
@@ -36,16 +37,18 @@
         var wt = $w.scrollTop(),
             wb = wt + $w.height(),
             et = $e.offset().top,
-            eb = et + $e.height();
+           eb = et + $e.height(),
+					ww = $w.width(),
+					el = $e.offset().left;
 
-        return eb >= wt - th && et <= wb + th;
+				return eb >= wt - th && et <= wb + th && el <= ww;
       });
 
       loaded = inview.trigger("unveil");
       images = images.not(loaded);
     }
 
-    $w.on("scroll.unveil resize.unveil lookup.unveil", unveil);
+    $stw.on("scroll.unveil resize.unveil lookup.unveil transitionend.unveil transitionstart.unveil", unveil);
 
     unveil();
 
