@@ -10,7 +10,7 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(threshold, callback, errorSrc) {
 
     var $w = $(window),
         th = threshold || 0,
