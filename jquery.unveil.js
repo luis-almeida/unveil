@@ -10,7 +10,7 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(threshold, callback, errorSrc) {
 
     var $w = $(window),
         th = threshold || 0,
@@ -19,12 +19,22 @@
         images = this,
         loaded;
 
+
     this.one("unveil", function() {
       var source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
       if (source) {
         this.setAttribute("src", source);
         if (typeof callback === "function") callback.call(this);
+      } else if(errorSrc){
+
+          this.setAttribute("src", errorSrc);
+      }
+      this.onerror = function () {
+          if(errorSrc)
+          {
+              this.setAttribute("src", errorSrc);
+          }
       }
     });
 
