@@ -12,18 +12,27 @@
 
   $.fn.unveil = function(threshold, callback) {
 
-    var $w = $(window),
-        th = threshold || 0,
-        retina = window.devicePixelRatio > 1,
-        attrib = retina? "data-src-retina" : "data-src",
-        images = this,
+    var $w           = $(window),
+        th           = threshold || 0,
+        retina       = window.devicePixelRatio > 1,
+        attrib       = "data-src",
+        attribRetina = "data-src-retina",
+        images       = this,
         loaded;
 
     this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
-      source = source || this.getAttribute("data-src");
+      var source = this.getAttribute( retina && this.hasAttribute(attribRetina) ? attribRetina : attrib);
       if (source) {
-        this.setAttribute("src", source);
+        if (this.tagName.toUpperCase() === "IMG") {
+          this.setAttribute("src", source);
+        } else {
+          this.style.backgroundImage      = "url('" + source + "')";
+          this.style.backgroundAttachment = this.hasAttribute(attrib + "-attachment") ? this.getAttribute(attrib + "-attachment") : (this.style.backgroundAttachment || "scroll");
+          this.style.backgroundColor      = this.hasAttribute(attrib + "-color")      ? this.getAttribute(attrib + "-color")      : (this.style.backgroundColor      || "transparent");
+          this.style.backgroundPosition   = this.hasAttribute(attrib + "-position")   ? this.getAttribute(attrib + "-position")   : (this.style.backgroundPosition   || "center center");
+          this.style.backgroundRepeat     = this.hasAttribute(attrib + "-repeat")     ? this.getAttribute(attrib + "-repeat")     : (this.style.backgroundRepeat     || "no-repeat");
+          this.style.backgroundSize       = this.hasAttribute(attrib + "-size")       ? this.getAttribute(attrib + "-size")       : (this.style.backgroundSize       || "cover");
+        }
         if (typeof callback === "function") callback.call(this);
       }
     });

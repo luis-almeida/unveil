@@ -68,9 +68,17 @@
         list-style: none;
         padding: 0;
     }
+    ul.bullet {
+        list-style: circle;
+    }
     ul > li {
         margin-top: 50px;
         text-align: center;
+    }
+    ul.bullet > li {
+        margin-top: initial;
+        margin-bottom: 5px;
+        text-align: left;
     }
     ul > li > img {
         display: inline-block;
@@ -116,13 +124,44 @@
     <p>Use a placeholder image in the src attribute - something to be displayed while the original image loads - and include the actual image source in a "data-src" attribute.</p>
     <p>If you want to serve high-resolution images to devices with retina displays, you just have to include the source for those images in a "data-src-retina" attribute.</p>
     <p>You don't need to include a "data-src-retina" attribute in all the image tags, unveil is smart enough to fallback to "data-src" or even do nothing in case there isn't any "data-src" specified.</p>
-    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img1.jpg"</span> /></code>
+    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img1.jpg"</span> /&gt;</code>
     <br>
-    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img2.jpg"</span> <span class="blue">data-src-retina=</span><span class="red">"img2-retina.jpg"</span> /></code>
+    <code>&lt;img <span class="blue">src=</span><span class="red">"bg.png"</span> <span class="blue">data-src=</span><span class="red">"img2.jpg"</span> <span class="blue">data-src-retina=</span><span class="red">"img2-retina.jpg"</span> /&gt;</code>
     <br>
     <p>If you care about users without javascript enabled, you can include the original image inside a &lt;noscript&gt; tag:</p>
     <code>&lt;noscript&gt;<br>&nbsp;&nbsp;&lt;img <span class="blue">src=</span><span class="red">"img1.jpg"</span> /><br>&lt;/noscript&gt;</code>
     <br><br>
+    <p>For non-img tags the image will be set as background.</p>
+    <code>&lt;div <span class="blue">data-src=</span><span class="red">"img/hero.png"</span><br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;<span class="blue">data-src-retina=</span><span class="red">"img/hero-retina.png"</span>&gt;&lt;/div&gt;
+    </code>
+    <br>
+    <p>In addition to the "data-src" and "data-src-retina" attributes, you can optionally specify some CSS properties via attributes or omit them to use CSS values as defined in your page or, if none are defined, use these defaults:</p>
+    <ul class="bullet">
+        <li>"data-src-attachment" &#10231; "background-attachment" property,<br>defaults to "scroll".</li>
+        <li>"data-src-color" &#10231; "background-color" property,<br>defaults to "transparent"</li>
+        <li>"data-src-position" &#10231; "background-position" property,<br>defaults to "center center"</li>
+        <li>"data-src-repeat" &#10231; "background-repeat" property,<br>defaults to "no-repeat"</li>
+        <li>"data-src-size" &#10231; "background-size" property,<br>defaults to "cover"</li>
+    </ul>
+    <code>
+        &lt;style&gt;<br>
+        .odd-parallax &#123;<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<span class="blue">background-attachment:</span><span class="red">"fixed;"</span><br>
+        &#125;<br>
+        &lt;/style&gt;<br>
+            &lt;div <span class="blue">class=</span><span class="red">"odd-parallax"</span><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<span class="blue">data-src=</span><span class="red">"img/hero.png"</span><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<span class="blue">data-src-retina=</span><span class="red">"img/hero-retina.png"</span><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<span class="blue">data-src-color=</span><span class="red">"&#35;41aba0"</span><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<span class="blue">data-src-position=</span><span class="red">"left center"</span><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<span class="blue">data-src-size=</span><span class="red">"100px 100px"</span>&gt;&lt;/div&gt;<br>
+            &lt;!-- CSS property "background-attachment" will<br>automatically be retrieved from current CSS --&gt;<br>
+            &lt;!-- CSS property "background-repeat" will<br>automatically be set to "no-repeat" --&gt;
+    </code>
+    <br>
+    <br>
+    <br>
     <p>Run the script on document ready:</p>
     <code>$(<span class="blue">document</span>).ready(<span class="blue">function</span>() {<br>
     &nbsp;&nbsp;$(<span class="red">"img"</span>).unveil();<br>
