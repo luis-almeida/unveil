@@ -10,9 +10,10 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(threshold, callback, target, url) {
 
     var $w = $(window),
+		trg = target || $w,
         th = threshold || 0,
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
@@ -20,7 +21,7 @@
         loaded;
 
     this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
+      var source = url || this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
       if (source) {
         this.setAttribute("src", source);
@@ -33,8 +34,8 @@
         var $e = $(this);
         if ($e.is(":hidden")) return;
 
-        var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
+        var wt = trg.offset().top;
+            wb = wt + trg.height(),
             et = $e.offset().top,
             eb = et + $e.height();
 
@@ -45,7 +46,8 @@
       images = images.not(loaded);
     }
 
-    $w.on("scroll.unveil resize.unveil lookup.unveil", unveil);
+    trg.scroll(unveil);
+    $w.resize(unveil);
 
     unveil();
 
