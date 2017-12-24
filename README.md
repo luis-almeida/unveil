@@ -1,5 +1,5 @@
-#unveil.js
-###A very lightweight plugin to lazy load images for jQuery or Zepto.js
+# unveil.js
+### A very lightweight plugin to lazy load images for jQuery or Zepto.js
 
 
 
@@ -11,9 +11,9 @@ That's what I did and this is my lightweight version of Lazy Load with support f
 Visit unveil's [project page](http://luis-almeida.github.com/unveil/) to read the documentation and see the demo.
 
 
-###Browser support
+### Browser support
 Compatible with All Browsers and IE7+.
 
 
-###License
+### License
 Unveil is licensed under the [MIT license](http://opensource.org/licenses/MIT).
