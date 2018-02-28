@@ -20,6 +20,9 @@
         loaded;
 
     this.one("unveil", function() {
+      if(this.getAttribute('data-srcset')){
+          this.setAttribute('srcset', this.getAttribute('data-srcset'))
+      }
       var source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
       if (source) {
