@@ -147,6 +147,23 @@
     &nbsp;&nbsp;});<br>
     });</code>
 
+    <h2>More data options</h2>
+    <p>
+    If you want to use more data-src options for a different purpose you can use the dataOptions parameter.
+    The dataOptions is an array of [function, data-attribute].</p>
+    <code>
+        var dataOptions = [<br>
+            [&nbsp;&nbsp;<span class="blue">function</span>()<br/> &nbsp;&nbsp; {&nbsp;&nbsp;return window.innerWidth < 991; },<br/> &nbsp;&nbsp;<span class="red">"data-src-small"</span><br/> ],<br>
+            [&nbsp;&nbsp;<span class="blue">function</span>()<br/> &nbsp;&nbsp; { return window.devicePixelRatio > 1; },<br/> &nbsp;&nbsp; <span class="red">"data-src-retina"</span><br/>]<br>
+        ];<br>
+    </code>
+    
+    <code>&lt;img <span class="blue">data-src-small=</span><span class="red">"corgi.png"</span> <span class="blue">data-src-retina=</span><span class="red">"corgiretina.png"</span><span class="blue">data-src=</span><span class="red">"normalcorgi.png"</span> /></code>
+    
+    <p>
+        The code gets a list of data-options. If the condition is valid, the code tries to get the value of the data attribute in the img tag. If it can't, tries with the next data attribute.
+    </p>
+
     <h2>Trigger</h2>
     <p>You can still trigger image loading whenever you need.</p>
     <p>All you have to do is select the images you want to "unveil" and trigger the event:</p>
